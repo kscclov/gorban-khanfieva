@@ -1,0 +1,659 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	setlocale(0, "");
+
+	int usanswer;
+	string usanswer1;
+	string name = "Игрок";
+	string colorname;
+	int numquest = 1;
+	int live = 3;
+	string colorhealth;
+	int points = 0;
+	string colorpoints;
+	string RED = "\x1b[31m";
+	string GREEN = "\x1b[32m";
+	string PURPLE = "\x1b[35m";
+	string BLUE = "\x1b[36m";
+	string textcolor = "\x1b[0m";
+	string answ;
+
+	cout << "Ассалам малекум наши маленькие телезрители\n";
+
+	//неправильное значение
+	while (true) {
+
+		cout << "Выбери для продолжения: \n 1. Начать игру\n 2. Настройки\n 3. Правила\n 4. Выйти\n";
+		cin >> usanswer;
+
+
+		//пункт выход
+		while (usanswer < 1 or usanswer > 4) {
+			cout << "Введи по-нормальному из предложенного\n";
+			cin >> usanswer;
+		}
+
+		if (usanswer == 4) {
+			cout << "Очень жаль, снимаем с тебя ярлычок игрока" << endl;
+			break;
+		}
+
+		//пункт правила
+
+		else if (usanswer == 3) {
+			cout << "Игрок получает очки за правильный ответ на вопрос;\nИгрок проходит дальше за правильный ответ;\nИгрок теряет жизнь при неправильном ответе.\n";
+			system("pause");
+			system("cls");
+		}
+
+		//пункт настройки
+		else if (usanswer == 2) {
+			while (true) {
+				cout << "1.Редактирование имя игрока;\n2.Редактирование вопросов в игре;\n3.Редактирование цвета интерфейса.\n";
+				cout << "Для выхода в меню введите 0;\n\n";
+				cout << "Введите выбранный пункт: ";
+				cin >> usanswer;
+
+				if (usanswer == 0) {
+					break;
+				}
+
+				if (usanswer == 1) {
+					cout << "Введите имя игрока: ";
+					cin >> usanswer1;
+					name = usanswer1;
+					continue;
+				}
+
+
+				if (usanswer == 2) {
+					cout << "Выберите желаемое количество вопросов в викторине:\n 1. 8\n 2. 10\n 3. 12\n";
+					cin >> usanswer;
+					numquest = usanswer;
+				}
+
+				else if (usanswer == 3) {
+					while (true) {
+						cout << "Выберите пункт изменения цвета:\n 1.Цвет текста\n 2.Цвет жизней\n 3.Цвет количества очков\n 4.Цвет имени игрока\n\n Для выхода в меню введите 0\n\n";
+						cin >> usanswer;
+
+						if (usanswer == 0) {
+							break;
+						}
+
+						//цвет текста
+						if (usanswer == 1) {
+							cout << "Выберите цвет:\n 1.Голубой\n 2.Зеленый\n 3.Пурпурный\n 4.Красный\n";
+							cin >> usanswer;
+
+							if (usanswer == 1) {
+								textcolor = BLUE;
+								cout << textcolor << "Вы выбрали этот цвет текста\n\n";
+								continue;
+							}
+							else if (usanswer == 2) {
+								textcolor = GREEN;
+								cout << textcolor << "Вы выбрали этот цвет текста\n\n";
+								continue;
+							}
+							else if (usanswer == 3) {
+								textcolor = PURPLE;
+								cout << textcolor << "Вы выбрали этот цвет текста\n\n";
+								continue;
+							}
+							else if (usanswer == 4) {
+								textcolor = RED;
+								cout << textcolor << "Вы выбрали этот цвет текста\n\n";
+								continue;
+							}
+						}
+
+						//цвет жизней
+						if (usanswer == 2) {
+							cout << "Выберите цвет:\n 1.Голубой\n 2.Зеленый\n 3.Пурпурный\n 4.Красный\n";
+							cin >> usanswer;
+							if (usanswer == 1) {
+								colorhealth = BLUE;
+								cout << "Вы выбрали этот цвет" << BLUE << " жизней\n\n" << textcolor;
+								cout << textcolor;
+								continue;
+							}
+							else if (usanswer == 2) {
+								cout << "Вы выбрали этот цвет" << GREEN << " жизней\n\n" << textcolor;
+								colorhealth = GREEN;
+								cout << textcolor;
+								continue;
+							}
+							else if (usanswer == 3) {
+								cout << "Вы выбрали этот цвет" << PURPLE << " жизней\n\n" << textcolor;
+								colorhealth = PURPLE;
+								cout << textcolor;
+								continue;
+							}
+							else if (usanswer == 4) {
+								cout << "Вы выбрали этот цвет" << RED << " жизней\n\n" << textcolor;
+								colorhealth = RED;
+								cout << textcolor;
+								continue;
+							}
+						}
+
+						//цвет очков
+						if (usanswer == 3) {
+							cout << "Выберите цвет:\n 1.Голубой\n 2.Зеленый\n 3.Пурпурный\n 4.Красный\n";
+							cin >> usanswer;
+
+							if (usanswer == 1) {
+								colorpoints = BLUE;
+								cout << "Вы выбрали этот цвет" << BLUE << " очков\n\n" << textcolor;
+								cout << textcolor;
+								continue;
+							}
+							else if (usanswer == 2) {
+								cout << "Вы выбрали этот цвет" << GREEN << " очков\n\n" << textcolor;
+								colorpoints = GREEN;
+								cout << textcolor;
+								continue;
+							}
+							else if (usanswer == 3) {
+								cout << "Вы выбрали этот цвет" << PURPLE << " очков\n\n" << textcolor;
+								colorpoints = PURPLE;
+								cout << textcolor;
+								continue;
+							}
+							else if (usanswer == 4) {
+								cout << "Вы выбрали этот цвет" << RED << " очков\n\n" << textcolor;
+								colorpoints = RED;
+								cout << textcolor;
+								continue;
+							}
+						}
+
+						//цвет имени
+						if (usanswer == 4) {
+							cout << "Выберите цвет:\n 1.Голубой\n 2.Зеленый\n 3.Пурпурный\n 4.Красный\n";
+							cin >> usanswer;
+
+							if (usanswer == 1) {
+								colorname = BLUE;
+								cout << "Теперь ваше имя выглядит так: " << BLUE << name << textcolor << endl;
+								cout << textcolor;
+								continue;
+							}
+							else if (usanswer == 2) {
+								colorname = GREEN;
+								cout << "Теперь ваше имя выглядит так: " << GREEN << name << textcolor << endl;
+								cout << textcolor;
+								continue;
+							}
+							else if (usanswer == 3) {
+								colorname = PURPLE;
+								cout << "Теперь ваше имя выглядит так: " << PURPLE << name << textcolor << endl;
+								cout << textcolor;
+								continue;
+							}
+							else if (usanswer == 4) {
+								colorname = RED;
+								cout << "Теперь ваше имя выглядит так: " << RED << name << textcolor << endl;
+								cout << textcolor;
+								continue;
+							}
+						}
+					}
+				}
+			}
+		}
+		//пункт начать игру
+		else if (usanswer == 1) {
+
+			while (live > 1) {
+
+				//1 вопрос
+				cout << "[*] Игрок:" << colorname << name << textcolor << " |Очки : " << colorpoints << points << textcolor << " |Жизни : " << colorhealth << live << textcolor << "| ";
+				cout << "[ 1 ] Вопрос: Сколько байт занимает тип данных float?\n\n";
+				cout << "[ A ] 1" << "    [ B ] 2" << endl << "[ C ] 3" << "    [ D ] 4\n\n";
+
+				cout << "[*] Выбрать ответ: " << answ << endl;
+				cin >> answ;
+
+				if (answ == "D" or answ == "d") {
+					points++;
+					cout << "Хорош, ответ верный\n";
+				}
+				else {
+					live = live - 1;
+					cout << endl << "Не хорошо братик, ты потерял жизнь!\n";
+				}
+				answ = "";
+
+				system("pause");
+				system("cls");
+
+				//2 вопрос
+				cout << "[*] Игрок:" << colorname << name << textcolor << " |Очки : " << colorpoints << points << textcolor << " |Жизни : " << colorhealth << live << textcolor << "| \n\n";
+				cout << "[ 2 ] Вопрос: long - какой тип данных?\n\n";
+				cout << "[ A ] Число с плавающей точкой" << "    [ B ] Целое число" << endl << "[ C ] Символьный" << "    [ D ] Логический\n\n";
+
+				cout << "[*] Выбрать ответ: " << answ << endl;
+				cin >> answ;
+
+				if (answ == "B" or answ == "b") {
+					points++;
+					cout << "Хорош, ответ верный\n";
+				}
+				else {
+					live = live - 1;
+					cout << endl << "Не хорошо братик, ты потерял жизнь!\n";
+				}
+				answ = "";
+
+				system("pause");
+				system("cls");
+
+				//3 вопрос
+				cout << "[*] Игрок:" << colorname << name << textcolor << " |Очки : " << colorpoints << points << textcolor << " |Жизни : " << colorhealth << live << textcolor << "| \n\n";
+				cout << "[ 3 ] Вопрос: С какой команды начинается любой алгоритм?\n\n";
+				cout << "[ A ] Program" << "    [ B ] Repeat" << endl << "[ C ] While" << "    [ D ] Endl\n\n";
+
+				cout << "[*] Выбрать ответ: " << answ << endl;
+				cin >> answ;
+
+				if (answ == "A" or answ == "a") {
+					points++;
+					cout << "Хорош, ответ верный\n";
+				}
+
+				else {
+					live = live - 1;
+					cout << endl << "Не хорошо братик, ты потерял жизнь!\n";
+				}
+				answ = "";
+
+				system("pause");
+				system("cls");
+
+
+				if (live == 0) {
+					system("cls");
+					cout << endl << "Ты выбыл, как жаль...\n\n";
+					system("pause");
+					system("cls");
+					break;
+				}
+
+				//4 вопрос
+				cout << "[*] Игрок:" << colorname << name << textcolor << " |Очки : " << colorpoints << points << textcolor << " |Жизни : " << colorhealth << live << textcolor << "| \n\n";
+				cout << "[ 4 ] Вопрос: Что служит разделителями между операторами?\n\n";
+				cout << "[ A ] Точка с запятой ;" << "    [ B ] Запятая ," << endl << "[ C ] Пробел " << "    [ D ] Точка .\n\n";
+
+				cout << "[*] Выбрать ответ: " << answ << endl;
+				cin >> answ;
+
+				if (answ == "A" or answ == "a") {
+					points++;
+					cout << "Хорош, ответ верный\n";
+				}
+
+				else {
+					live = live - 1;
+					cout << endl << "Не хорошо братик, ты потерял жизнь!\n";
+				}
+				answ = "";
+
+				system("pause");
+				system("cls");
+
+				if (live == 0) {
+					system("cls");
+					cout << endl << "Ты выбыл, как жаль...\n\n";
+					system("pause");
+					system("cls");
+					break;
+				}
+
+				//5 вопрос
+				cout << "[*] Игрок:" << colorname << name << textcolor << " |Очки : " << colorpoints << points << textcolor << " |Жизни : " << colorhealth << live << textcolor << "| \n\n";
+				cout << "[ 5 ] Вопрос: Что служит выводом текста?\n\n";
+				cout << "[ A ] cin" << "    [ B ] endl" << endl << "[ C ] cout" << "    [ D ] string\n\n";
+
+				cout << "[*] Выбрать ответ: " << answ << endl;
+				cin >> answ;
+
+				if (answ == "C" or answ == "c") {
+					points++;
+					cout << "Хорош, ответ верный\n";
+				}
+
+				else {
+					live = live - 1;
+					cout << endl << "Не хорошо братик, ты потерял жизнь!\n";
+				}
+				answ = "";
+
+				system("pause");
+				system("cls");
+
+				if (live == 0) {
+					system("cls");
+					cout << endl << "Ты выбыл, как жаль...\n\n";
+					system("pause");
+					system("cls");
+					break;
+				}
+
+				//6 вопрос
+				cout << "[*] Игрок:" << colorname << name << textcolor << " |Очки : " << colorpoints << points << textcolor << " |Жизни : " << colorhealth << live << textcolor << "| \n\n";
+				cout << "[ 6 ] Вопрос: Какой оператор прерывает цикл?\n\n";
+				cout << "[ A ] continue" << "    [ B ] endl" << endl << "[ C ] down" << "    [ D ] break\n\n";
+
+				cout << "[*] Выбрать ответ: " << answ << endl;
+				cin >> answ;
+
+				if (answ == "D" or answ == "d") {
+					points++;
+					cout << "Хорош, ответ верный\n";
+				}
+
+				else {
+					live = live - 1;
+					cout << endl << "Не хорошо братик, ты потерял жизнь!\n";
+				}
+				answ = "";
+
+				system("pause");
+				system("cls");
+
+				if (live == 0) {
+					system("cls");
+					cout << endl << "Ты выбыл, как жаль...\n\n";
+					system("pause");
+					system("cls");
+					break;
+				}
+
+				//7 вопрос
+				cout << "[*] Игрок:" << colorname << name << textcolor << " |Очки : " << colorpoints << points << textcolor << " |Жизни : " << colorhealth << live << textcolor << "| \n\n";
+				cout << "[ 7 ] Вопрос: Какие скобки задают массив?\n\n";
+				cout << "[ A ] []" << "    [ B ] {}" << endl << "[ C ]()\n\n";
+
+				cout << "[*] Выбрать ответ: " << answ << endl;
+				cin >> answ;
+
+				if (answ == "A" or answ == "a") {
+					points++;
+					cout << "Хорош, ответ верный\n";
+				}
+
+				else {
+					live = live - 1;
+					cout << endl << "Не хорошо братик, ты потерял жизнь!\n";
+				}
+				answ = "";
+
+
+				if (live == 0) {
+					system("cls");
+					cout << endl << "Ты выбыл, как жаль...\n\n";
+					system("pause");
+					system("cls");
+					break;
+				}
+
+				system("pause");
+				system("cls");
+
+				//8 вопрос
+				cout << "[*] Игрок:" << colorname << name << textcolor << " |Очки : " << colorpoints << points << textcolor << " |Жизни : " << colorhealth << live << textcolor << "| \n\n";
+				cout << "[ 8 ] Вопрос: Как задается библиотека?\n\n";
+				cout << "[ A ] iostream <include>" << "    [ B ] #include <iostream>" << endl << "[ C ] <include> iostream " << "    [ D ] #iostream <include>\n\n";
+
+				cout << "[*] Выбрать ответ: " << answ << endl;
+				cin >> answ;
+
+				if (answ == "B" or answ == "b") {
+					points++;
+					cout << "Хорош, ответ верный\n";
+				}
+
+				else {
+					live = live - 1;
+					cout << endl << "Не хорошо братик, ты потерял жизнь!\n";
+				}
+				answ = "";
+
+				system("pause");
+				system("cls");
+
+				if (live == 0) {
+					system("cls");
+					cout << endl << "Ты выбыл, как жаль...\n\n";
+					system("pause");
+					system("cls");
+					break;
+				}
+
+
+				//10 вопросов в игре
+				if (numquest == 2) {
+					//9 вопрос
+					cout << "[*] Игрок:" << colorname << name << textcolor << " |Очки : " << colorpoints << points << textcolor << " |Жизни : " << colorhealth << live << textcolor << "| \n\n";
+					cout << "[ 9 ] Вопрос: Правильный синтаксис if/else:\n\n";
+					cout << "[ A ] if (условие) [...] else [...]" << "    [ B ] if [условие] {...} else [...]" << endl << "[ C ] if (условие) {...} else {...} " << "    [ D ] if (условие) {... else { ...}}\n\n";
+
+					cout << "[*] Выбрать ответ: " << answ << endl;
+					cin >> answ;
+
+					if (answ == "C" or answ == "c") {
+						points++;
+						cout << "Хорош, ответ верный\n";
+					}
+
+					else {
+						live = live - 1;
+						cout << endl << "Не хорошо братик, ты потерял жизнь!\n";
+					}
+					answ = "";
+
+					system("pause");
+					system("cls");
+
+					if (live == 0) {
+						system("cls");
+						cout << endl << "Ты выбыл, как жаль...\n\n";
+						system("pause");
+						system("cls");
+						break;
+					}
+
+					//10 вопрос
+					cout << "[*] Игрок:" << colorname << name << textcolor << " |Очки : " << colorpoints << points << textcolor << " |Жизни : " << colorhealth << live << textcolor << "| \n\n";
+					cout << "[ 10 ] Вопрос: Какого вида инициалиации переменных не существует?\n\n";
+					cout << "[ A ] lOWcASE " << "    [ B ] shake_case" << endl << "[ C ] CamelCase" << "    [ D ] kebab-case\n\n";
+
+					cout << "[*] Выбрать ответ: " << answ << endl;
+					cin >> answ;
+
+					if (answ == "A" or answ == "a") {
+						points++;
+						cout << "Хорош, ответ верный\n";
+					}
+
+					else {
+						live = live - 1;
+						cout << endl << "Не хорошо братик, ты потерял жизнь!\n";
+					}
+					answ = "";
+
+					system("pause");
+					system("cls");
+
+					if (live == 0) {
+						system("cls");
+						cout << endl << "Ты выбыл, как жаль...\n\n";
+						system("pause");
+						system("cls");
+						break;
+					}
+
+
+					if (live > 0) {
+						cout << endl << "Ты победил, красава мужик" << endl;
+						cout << "На счету у тебя осталось " << live << " хпшек\n" << " Ты наработал  " << points << " очков\n" << endl;
+						system("pause");
+						system("cls");
+					}
+				}
+
+				//12 вопросов в игре
+				else if (numquest == 3) {
+
+					//9 вопрос
+					cout << "[*] Игрок:" << colorname << name << textcolor << " |Очки : " << colorpoints << points << textcolor << " |Жизни : " << colorhealth << live << textcolor << "| \n\n";
+					cout << "[ 9 ] Вопрос: Правильный синтаксис if/else:\n\n";
+					cout << "[ A ] if (условие) [...] else [...]" << "    [ B ] if [условие] {...} else [...]" << endl << "[ C ] if (условие) {...} else {...} " << "    [ D ] if (условие) {... else { ...}}\n\n";
+
+					cout << "[*] Выбрать ответ: " << answ << endl;
+					cin >> answ;
+
+					if (answ == "C" or answ == "c") {
+						points++;
+						cout << "Хорош, ответ верный\n";
+					}
+
+					else {
+						live = live - 1;
+						cout << endl << "Не хорошо братик, ты потерял жизнь!\n";
+					}
+					answ = "";
+
+					system("pause");
+					system("cls");
+
+					if (live == 0) {
+						system("cls");
+						cout << endl << "Ты выбыл, как жаль...\n\n";
+						system("pause");
+						system("cls");
+						break;
+					}
+
+					//10 вопрос
+					cout << "[*] Игрок:" << colorname << name << textcolor << " |Очки : " << colorpoints << points << textcolor << " |Жизни : " << colorhealth << live << textcolor << "| \n\n";
+					cout << "[ 10 ] Вопрос: Какого вида инициалиации переменных не существует?\n\n";
+					cout << "[ A ] lOWcASE " << "    [ B ] shake_case" << endl << "[ C ] CamelCase" << "    [ D ] kebab-case\n\n";
+
+					cout << "[*] Выбрать ответ: " << answ << endl;
+					cin >> answ;
+
+					if (answ == "A" or answ == "a") {
+						points++;
+						cout << "Хорош, ответ верный\n";
+					}
+
+					else {
+						live = live - 1;
+						cout << endl << "Не хорошо братик, ты потерял жизнь!\n";
+					}
+					answ = "";
+
+					system("pause");
+					system("cls");
+
+					if (live == 0) {
+						system("cls");
+						cout << endl << "Ты выбыл, как жаль...\n\n";
+						system("pause");
+						system("cls");
+						break;
+					}
+
+
+					if (live > 0) {
+						cout << endl << "Ты победил, красава мужик" << endl;
+						cout << "На счету у тебя осталось " << live << " хпшек\n" << " Ты нработал  " << points << " очков\n" << endl;
+						system("pause");
+						system("cls");
+					}
+
+					//11 вопрос
+					cout << "[*] Игрок:" << colorname << name << textcolor << " |Очки : " << colorpoints << points << textcolor << " |Жизни : " << colorhealth << live << textcolor << "| \n\n";
+					cout << "[ 11 ] Вопрос: Что минимально необходимо установить для запуска приложений, написанных на C++?\n\n";
+					cout << "[ A ] JRE" << "    [ B ] JDK" << endl << "[ C ] IDE" << "    [ D ] IKL\n\n";
+
+					cout << "[*] Выбрать ответ: " << answ << endl;
+					cin >> answ;
+
+					if (answ == "C" or answ == "c") {
+						points++;
+						cout << "Хорош, ответ верный\n";
+					}
+
+					else {
+						live = live - 1;
+						cout << endl << "Не хорошо братик, ты потерял жизнь!\n";
+					}
+					answ = "";
+
+					system("pause");
+					system("cls");
+
+					if (live == 0) {
+						system("cls");
+						cout << endl << "Ты выбыл, как жаль...\n\n";
+						system("pause");
+						system("cls");
+						break;
+					}
+
+					//12 вопрос
+					cout << "[*] Игрок:" << colorname << name << textcolor << " |Очки : " << colorpoints << points << textcolor << " |Жизни : " << colorhealth << live << textcolor << "| \n\n";
+					cout << "[ 12 ] Вопрос: Как принято инициализироваать константы?\n\n";
+					cout << "[ A ] const SCAM " << "    [ B ] const scam" << endl << "[ C ] const ScaM" << "    [ D ] const Scam\n\n";
+
+					cout << "[*] Выбрать ответ: " << answ << endl;
+					cin >> answ;
+
+					if (answ == "A" or answ == "a") {
+						points++;
+						cout << "Хорош, ответ верный\n";
+					}
+
+					else {
+						live = live - 1;
+						cout << endl << "Не хорошо братик, ты потерял жизнь!\n";
+					}
+					answ = "";
+
+					system("pause");
+					system("cls");
+
+					if (live == 0) {
+						system("cls");
+						cout << endl << "Ты выбыл, как жаль...\n\n";
+						system("pause");
+						system("cls");
+						break;
+					}
+
+
+					else if (live > 0) {
+						cout << endl << "Ты победил, красава мужик" << endl;
+						cout << "На счету у тебя осталось " << live << " хпшек\n" << " Ты наработал  " << points << " очков\n" << endl;
+						system("pause");
+						system("cls");
+					}
+				}
+				else if (live > 0) {
+					cout << endl << "Ты победил, красава мужик" << endl;
+					cout << "На счету у тебя осталось " << live << " хпшек\n" << " Ты наработал  " << points << " очков\n" << endl;
+					system("pause");
+					system("cls");
+				}
+			}
+		}
+	}
+	return 0;
+}
