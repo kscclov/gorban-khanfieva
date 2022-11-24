@@ -1,0 +1,347 @@
+#include <iostream>
+using namespace std;
+int main() {
+    setlocale(0, "");
+    int usanswer;
+    int b;
+    int s;
+    int leight;
+    char texture;
+    int high;
+    //вспомогательные
+    int i;
+    int k;
+    int n;
+    int p1 = 1;
+    do {
+        cout << "хай!\nЭто программа - 'Геометрические фигуры'\n\nДля начала введите выберите фигуру:\n1.Линия\n2.Квадрат\n3.Прямоугольник\n4.Треугольник\n5.Решетка\n6.Крестик\n7.Плюс\n8.Ромб\n\n\n\n\n\nНажмите 0 для окончания процедуры\n";
+        cin >> usanswer;
+
+        //линия
+        if (usanswer == 1) {
+
+            cout << "[+]Выберите тип линии:\n [1] Горизонтальная\n [2] Вертикальная\n";
+            cin >> b;
+
+            if (b == 1) {
+                cout << "Выбери длину линии: ";
+                cin >> leight;
+                cout << "Выбери текстуру линии: ";
+                cin >> texture;
+
+                while (leight > 0) {
+                    cout << texture;
+                    leight--;
+                }
+                cout << endl;
+            }
+
+            if (b == 2) {
+                cout << "Выбери длину линии: ";
+                cin >> leight;
+                cout << "Выбери текстуру линии: ";
+                cin >> texture;
+
+                while (leight > 0) {
+                    cout << texture << "\n";
+                    leight--;
+                }
+                cout << endl;
+            }
+            cout << endl;
+            system("pause");
+            system("cls");
+        }
+
+        //квадрат
+        else if (usanswer == 2) {
+
+            cout << "[+]Выберите тип квадрата:\n[1] Заполненный\n[2] Пустой\n";
+            cin >> b;
+
+            cout << "Введите длину квадрата: ";
+            cin >> leight;
+            cout << "Введите текстуру квадрата: ";
+            cin >> texture;
+
+            if (b == 1) {
+                for (char a = 0; a < leight; a++) {
+                    for (char c = 0; c < leight; c++) {
+                        cout << texture << " ";
+                    }
+                    cout << endl;
+                }
+            }
+            else if (b == 2) {
+                s = 1;
+                while (s <= leight) {
+                    cout << texture << " ";
+                    s++;
+                }
+                cout << endl;
+                if (leight != 1) {
+                    n = 2 * s - 1;
+                    s = 1;
+                    p1 = 1;
+                    while (s <= leight - 2) {
+                        cout << texture;
+                        while (p1 <= n - 4) {
+                            cout << " ";
+                            p1++;
+                        }
+                        p1 = 1;
+                        cout << texture << endl;
+                        s++;
+                    }
+                    s = 1;
+
+                    while (s <= leight) {
+                        cout << texture << " ";
+                        s++;
+                    }
+                }
+                cout << endl;
+            }
+            cout << endl;
+            system("pause");
+            system("cls");
+        }
+
+        //прямоугольник
+        else if (usanswer == 3) {
+            cout << "[+]Выберите тип прямоугольника:\n[1] Заполненный\n[2] Пустой\n";
+            cin >> b;
+
+            cout << "Введите длину прямоугольника: ";
+            cin >> leight;
+            cout << "Введите высоту прямоугольника: ";
+            cin >> high;
+            cout << "Введите текстуру прямоугольника: ";
+            cin >> texture;
+
+            if (b == 1) {
+                for (char a = 0; a < high; a++) {
+                    for (char c = 0; c < leight; c++) {
+                        cout << texture << " ";
+                    }
+                    cout << endl;
+                }
+            }
+            else if (b == 2) {
+                s = 1;
+                while (s < leight) {
+                    cout << texture << " ";
+                    s++;
+                }
+                cout << endl;
+                if (leight != 1) {
+                    n = 2 * s - 1;
+                    s = 1;
+                    p1 = 1;
+                    while (s <= high - 2) {
+                        cout << texture;
+                        while (p1 <= n - 4) {
+                            cout << " ";
+                            p1++;
+                        }
+                        p1 = 1;
+                        cout << texture << endl;
+                        s++;
+                    }
+                    s = 1;
+                    while (s < leight) {
+                        cout << texture << " ";
+                        s++;
+                    }
+                }
+                cout << endl;
+            }
+            cout << endl;
+            system("pause");
+            system("cls");
+        }
+
+        //треугольник
+        else  if (usanswer == 4) {
+            cout << "[+]Выберите тип треугольника:\n[1] Заполненный\n[2] Пустой\n";
+            cin >> b;
+
+
+
+            if (b == 1) {
+                cout << "Введите высоту треугольника: ";
+                cin >> high;
+                cout << "Введите текстуру треугольника: ";
+                cin >> texture;
+
+                for (i = 0; i < high; i++) {
+                    for (k = 1; k < high - i; k++) {
+                        cout << " " << " ";
+                    }
+                    for (k = high - 2 * i; k <= high; k++) {
+                        cout << texture << " ";
+                    }
+                    cout << endl;
+                }
+            }
+            else if (b == 2) {
+                cout << "Введите высоту треугольника: ";
+                cin >> high;
+                cout << "Введите текстуру треугольника: ";
+                cin >> texture;
+
+                for (i = 0; i < high; i++) {
+                    for (k = 1; k < high - i; k++) {
+                        cout << " " << " ";
+                    }
+                    for (k = high - 2 * i; k <= high; k++) {
+                        if (i == 0 or i == high - 1) {
+                            cout << texture << " ";
+                        }
+                        else if (i > 0 and i < high - 1) {
+                            if (k == high or k == high - i * 2) {
+                                cout << texture << " ";
+                            }
+                            else {
+                                cout << " " << " ";
+                            }
+                        }
+                    }
+                    cout << endl;
+                }
+                cout << endl << endl;
+                system("pause");
+                system("cls");
+            }
+        }
+        //решетка
+        else if (usanswer == 5) {
+
+            cout << "Введите размер решётки: ";
+            cin >> high;
+            cout << "Введите текстуру решётки: ";
+            cin >> texture;
+            system("cls");
+
+            for (i = 0; i < high; i++) {
+                if (i % 2 == 0) {
+                    for (k = 0; k < high / 2; k++) {
+                        cout << "  " << texture << " ";
+                    }
+                    cout << endl;
+                }
+                else if (i % 2 != 0) {
+                    for (k = 0; k < high / 2; k++) {
+                        cout << texture << " " << texture << "  ";
+                    }
+                    cout << endl;
+                }
+                else {
+                    for (k = 0; k < high / 2; k++) {
+                        cout << texture << " " << texture << "  ";
+                    }
+                    cout << texture;
+                    cout << endl;
+                }
+
+            }
+            cout << endl;
+            system("pause");
+            system("cls");
+        }
+
+
+        //крестик
+        else if (usanswer == 6) {
+
+            cout << "Введите размер крестика: ";
+            cin >> high;
+            cout << "Введите текстуру крестика: ";
+            cin >> texture;
+            system("cls");
+
+            for (int i = 0; i < high; i++) {
+                for (int k = 0; k < high; k++) {
+                    if (k == i or k == high - i - 1) {
+                        cout << texture;
+                    }
+                    else {
+                        cout << " ";
+                    }
+                }
+                cout << endl;
+            }
+            cout << endl;
+            system("pause");
+            system("cls");
+        }
+        //плюс
+        else if (usanswer == 7) {
+
+            cout << "Введите размер плюса: ";
+            cin >> high;
+            cout << "Введите текстуру плюса: ";
+            cin >> texture;
+            system("cls");
+
+            for (int i = 0; i < high; i++) {
+                if (i != high / 2) {
+                    for (k = 0; k < high; k++) {
+                        if (high % 2 != 0) {
+                            if (k == high - 1) {
+                                cout << texture;
+                            }
+                            else {
+                                cout << " ";
+                            }
+                        }
+                        else {
+                            if (k == high - 2) {
+                                cout << texture;
+                            }
+                            else {
+                                cout << " ";
+                            }
+                        }
+                    }
+                }
+                else {
+                    for (k = 0; k < high; k++) {
+                        cout << texture << " ";
+                    }
+                }
+                cout << endl;
+            }
+            cout << endl;
+            system("pause");
+            system("cls");
+        }
+        //ромб
+        else if (usanswer == 8) {
+            cout << "Введите размер ромба: ";
+            cin >> high;
+            cout << "Введите текстуру ромба: ";
+            cin >> texture;
+            system("cls");
+
+            for (i = 0; i < high; i++) {
+                for (k = 0; k < high; k++) {
+                    if (i + high / 2 == k || i - high / 2 == k || i == high / 2 - k || i == high / 2 + high - k - 1) {
+                        cout << texture;
+                    }
+                    else {
+                        cout << " ";
+                    }
+                }
+                cout << endl;
+            }
+            cout << endl;
+            system("pause");
+            system("cls");
+        }
+        else if (usanswer == 0) {
+            break;
+        }
+    } while (true);  
+ return 0;
+}
