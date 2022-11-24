@@ -1,0 +1,130 @@
+#include <iostream>
+using namespace std;
+#include <conio.h>
+
+int main() {
+
+	setlocale(0, "");
+	int key;
+	int key2;
+	while (true) {
+		cout << "[ + ] Переводчик  \n \n" << "[ 1 ] Русские слова \n" << "[ 2 ] Английские слова \n\n" << "[ 3 ] Выйти \n";
+		key = _getch();
+		system("cls");
+		if (key == 49) {
+			cout << "[ + ] Переводчик 'Список русских слов'\n\n[ 1 ]Дом\n[ 2 ]Дорога\n[ 3 ]Город\n[ 4 ]Собака\n[ 5 ]Дверь\n[ 6 ]Стул\n[ 7 ]Ручка\n[ 8 ]Луна\n[ 9 ]Человек\n[ 10 ]Облако\n[ 11 ]Клоун\n[ 12 ]Снег\n[ 13 ]Голова\n[ 14 ]Нога\n[ 15 ]Уровень";
+			cout << "\n\nВыберите номер слова: ";
+			cin >> key2;
+			switch (key2) {
+			case 1:
+				cout << "Перевод : дoм -> home\n";
+				break;
+			case 2:
+				cout << "Перевод : дорога -> road\n";
+				break;
+			case 3:
+				cout << "Перевод : город -> city\n";
+				break;
+			case 4:
+				cout << "Перевод : собака -> dog\n";
+				break;
+			case 5:
+				cout << "Перевод : дверь -> door\n";
+				break;
+			case 6:
+				cout << "Перевод : стул -> chair\n ";
+				break;
+			case 7:
+				cout << "Перевод : ручка -> pen\n";
+				break;
+			case 8:
+				cout << "Перевод : луна -> moon\n ";
+				break;
+			case 9:
+				cout << "Перевод : человек -> human\n ";
+				break;
+			case 10:
+				cout << "Перевод : облако -> cloud\n";
+				break;
+			case 11:
+				cout << "Перевод : клоун -> clown\n";
+				break;
+			case 12:
+				cout << "Перевод : снег -> snow\n";
+				break;
+			case 13:
+				cout << "Перевод : голова -> head\n";
+				break;
+			case 14:
+				cout << "Перевод : нога -> leg\n";
+				break;
+			case 15:
+				cout << "Перевод : уровень -> level\n";
+				break;
+			}
+			system("pause");
+			system("cls");
+		}
+		else if (key == 50) {
+			cout << "[ + ] Переводчик 'Список английских слов'\n\n[ 1 ] Keyboard\n[ 2 ] Water\n[ 3 ] Fire\n[ 4 ] Tree\n[ 5 ] Display\n[ 6 ] Underground\n[ 7 ] Car\n[ 8 ] Juice\n[ 9 ] Hair\n[ 10 ] Window\n[ 11 ] Mother\n[ 12 ] Mouse\n[ 13 ] Computer\n[ 14 ] Knife\n[ 15 ] Cucumber";
+			cout << "\n\nВыберите номер слова: ";
+			cin >> key2;
+			switch (key2) {
+			case 1:
+				cout << "Перевод : Keyboard -> клавиатура\n";
+				break;
+			case 2:
+				cout << "Перевод : Water -> вода\n";
+				break;
+			case 3:
+				cout << "Перевод : Fire -> огонь\n";
+				break;
+			case 4:
+				cout << "Перевод : Tree -> дерево\n";
+				break;
+			case 5:
+				cout << "Перевод : Display -> монитор\n";
+				break;
+			case 6:
+				cout << "Перевод : Underground -> метро\n ";
+				break;
+			case 7:
+				cout << "Перевод : Car -> машина\n";
+				break;
+			case 8:
+				cout << "Перевод : Juice -> сок\n ";
+				break;
+			case 9:
+				cout << "Перевод : Hair -> волосы\n ";
+				break;
+			case 10:
+				cout << "Перевод : Window -> окно\n";
+				break;
+			case 11:
+				cout << "Перевод : Mother -> мама\n";
+				break;
+			case 12:
+				cout << "Перевод : Mouse -> мышь\n";
+				break;
+			case 13:
+				cout << "Перевод : Computer -> компьютер\n";
+				break;
+			case 14:
+				cout << "Перевод : Knife -> нож\n";
+				break;
+			case 15:
+				cout << "Перевод : Cucumber -> огурец\n";
+				break;
+			}
+
+
+			system("pause");
+			system("cls");
+		}
+		else if (key == 51) {
+			return 0;
+		}
+	}
+	system("pause");
+	return 0;
+}
