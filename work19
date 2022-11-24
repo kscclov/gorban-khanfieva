@@ -1,0 +1,67 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+setlocale(0, "");
+//
+int arrInt[10] = { 1, 20, 32, 4, 1, 2, 2, 54, 23, 0 };
+cout << "Массив Int:\n";
+for (int i = 0; i < 10; i++) {
+	cout << "arrInt[" << i << "] | значение :" << arrInt[i] << endl;
+}
+//
+
+short arrShort[10] = { 5, -5, 7, 20, -15, 24, 16, -12, 30, 4 };
+cout << "Массив Short:\n";
+for (int i = 0; i < 10; i++) {
+	cout << "arrShort[" << i << "] | значение :" << arrShort[i] << endl;
+}
+
+
+long arrLong[10] = { 8, -2, -1, 50, 5, 84, 100, 72, 32, 44 };
+cout << "Массив Long:\n";
+for (int i = 0; i < 10; i++) {
+	cout << "arrLong[" << i << "] | значение :" << arrLong[i] << endl;
+}
+
+
+float arrFloat[10] = { 1.21, 0.777, 0.11, 7.451, 0.541, 0.86, 5.4, 0.14, 0.798 };
+cout << "Массив Float:\n";
+for (int i = 0; i < 10; i++) {
+	cout << "arrFloat[" << i << "] | значение :" << arrFloat[i] << endl;
+}
+
+
+double arrDouble[10] = { 1.21, 0.777, 0.11, 7.451, 0.541, 0.86, 5.4, 0.14, 0.798 };
+cout << "Массив Double:\n";
+for (int i = 0; i < 10; i++) {
+	cout << "arrDouble[" << i << "] | значение :" << arrDouble[i] << endl;
+}
+
+
+char arrChar[10] = { '1', 'a', '2', 'b', '3', 'c', '4', 'd', '5', 'e' };
+cout << "Массив Char:\n";
+for (int i = 0; i < 10; i++) {
+	cout << "arrChar[" << i << "] | значение :" << arrChar[i] << endl;
+}
+
+
+bool arrBool[10] = { 0, true, 1, false, 0, -50, 12, 10, true, -1 };
+cout << "Массив Bool:\n";
+for (int i = 0; i < 10; i++) {
+	cout << "arrBool[" << i << "] | значение :" << arrBool[i] << endl;
+}
+
+
+string arrString[10] = {"хеллоу ворлд", "йоу", "как", "Ваши", "дела", "мои", "молодые", "и", "красивые", "телезрители" };
+cout << "Массив String:\n";
+for (int i = 0; i < 10; i++) {
+	cout << "arrString[" << i << "] | значение :" << arrString[i] << endl;
+}
+
+
+	int _;
+	cin >> _;
+	return 0;
+}
