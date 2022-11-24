@@ -1,0 +1,299 @@
+#include <iostream>
+#include <cmath>
+#include <cstdlib>
+
+using namespace std;
+
+int main()
+{
+    setlocale(0, "");
+    const int N = 3;
+    int x, y, k, dgt, usansw;
+    char A[N][N], c, z;
+    int win1 = 0;
+    int win2 = 0;
+    int lose1 = 0;
+    int lose2 = 0;
+    int def = 0;
+    double points1 = 0;
+    double points2 = 0;
+    string name1 = "Игрок 1";
+    string name2 = "Игрок 2";
+    string figcolor1 = "\x1b[36m";
+    string figcolor2 = "\x1b[32m";
+    string s, a, b, usanswer;
+    string RED = "\x1b[31m";
+    string BLUE = "\x1b[36m";
+    string GREEN = "\x1b[32m";
+    string textcolor = "\x1b[0m";
+    string PURPLE = "\x1b[35m";
+    string GREY = "\x1b[90m";
+    a = "НОЛИКИ";
+    b = "КРЕСТИКИ";
+    z = '0';
+    c = 'X';
+
+    while (true) {
+        cout << GREEN << "[ * ] Приветствуем в игре крестики-нолики!\n\n\n" << textcolor << "[1] Начать игру\n[2] Статистика\n[3] Настройки\n[4] Выход" << endl;
+        cin >> usansw;
+        system("cls");
+
+        //пункт выход
+        if (usansw == 4) {
+            exit;
+            break;
+        }
+
+        //пункт настройки
+        if (usansw == 3) {
+            cout << "|" << BLUE << "Настройки игрока\n\n" << "| 1 |" << textcolor << "Первый игрок\n" << BLUE << "| 2 |" << textcolor << "Второй игрок\n" << BLUE << "| 3 |" << textcolor << "Выход\n";
+            cin >> usansw;
+            system("cls");
+
+            //игрок 1
+            if (usansw == 1) {
+                cout << BLUE << "| + | " << "Настройки игрока 1\n\n" << BLUE << "1 | " << textcolor << "Ник: " << name1 << endl;
+                cout << BLUE << "2 | " << textcolor << "Цвет: " << RED << "красный" << textcolor << endl;
+                cout << BLUE << "3 | " << textcolor << "Выход " << endl;
+                cin >> usansw;
+                system("cls");
+
+                if (usansw == 1) {
+                    cout << "Введите имя первого игрока: ";
+                    cin >> usanswer;
+                    name1 = usanswer;
+                    system("cls");
+                    continue;
+                }
+                else if (usansw == 2) {
+                    cout << "Выберите цвет:\n 1.Голубой\n 2.Зеленый\n 3.Пурпурный\n 4.Красный\n";
+                    cin >> usansw;
+                    system("cls");
+
+                    if (usansw == 1) {
+                        figcolor1 = BLUE;
+                        cout << textcolor << "Вы выбрали этот цвет:" << figcolor1 << name1 << textcolor << "\n\n";
+                        continue;
+                        system("cls");
+                    }
+                    else if (usansw == 2) {
+                        figcolor1 = GREEN;
+                        cout << textcolor << "Вы выбрали этот цвет:" << figcolor1 << name1 << textcolor << "\n\n";
+                        continue;
+                        system("cls");
+                    }
+                    else if (usansw == 3) {
+                        figcolor1 = PURPLE;
+                        cout << textcolor << "Вы выбрали этот цвет:" << figcolor1 << name1 << textcolor << "\n\n";
+                        continue;
+                        system("cls");
+                    }
+                    else if (usansw == 4) {
+                        figcolor1 = RED;
+                        cout << textcolor << "Вы выбрали этот цвет:" << figcolor1 << name1 << textcolor << "\n\n";
+                        continue;
+                        system("cls");
+                    }
+                }
+                else if (usansw == 3) {
+                    continue;
+                    system("cls");
+                }
+            }
+
+            //игрок 2
+            else if (usansw == 2) {
+                cout << BLUE << "| + | " << "Настройки игрока 2\n\n" << BLUE << "1 | " << textcolor << "Ник: " << name2 << endl;
+                cout << BLUE << "2 | " << textcolor << "Цвет: " << RED << "красный" << textcolor << endl;
+                cout << BLUE << "3 | " << textcolor << "Выход " << endl;
+                cin >> usansw;
+                system("cls");
+
+                if (usansw == 1) {
+                    cout << "Введите имя второго игрока: ";
+                    cin >> usanswer;
+                    name2 = usanswer;
+                    system("cls");
+                    continue;
+                    
+                }
+                else if (usansw == 2) {
+                    cout << "Выберите цвет:\n 1.Голубой\n 2.Зеленый\n 3.Пурпурный\n 4.Красный\n";
+                    cin >> usansw;
+                    system("cls");
+
+                    if (usansw == 1) {
+                        figcolor2 = BLUE;
+                        cout << textcolor << "Вы выбрали этот цвет:" << figcolor2 << name2 << textcolor << "\n\n";
+                        continue;
+                        system("cls");
+                    }
+                    else if (usansw == 2) {
+                        figcolor2 = GREEN;
+                        cout << textcolor << "Вы выбрали этот цвет:" << figcolor2 << name2 << textcolor << "\n\n";
+                        continue;
+                        system("cls");
+                    }
+                    else if (usansw == 3) {
+                        figcolor2 = PURPLE;
+                        cout << textcolor << "Вы выбрали этот цвет:" << figcolor2 << name2 << textcolor << "\n\n";
+                        continue;
+                        system("cls");
+                    }
+                    else if (usansw == 4) {
+                        figcolor2 = RED;
+                        cout << textcolor << "Вы выбрали этот цвет:" << figcolor2 << name2 << textcolor << "\n\n";
+                        continue;
+                        system("cls");
+                    }
+                }
+                else if (usansw == 3) {
+                    continue;
+                    system("cls");
+                }
+            }
+        }
+
+        //пункт статистика
+        if (usansw == 2) {
+            cout << BLUE << "[ * ]" << textcolor << " |  Статистика\n\n";
+            cout << "                       \t" << GREEN << "W" << "     " << RED << "L" << "     " << GREY << "D" << "  " << textcolor << "|  Очки\n";
+            cout << BLUE << " 1 | " << figcolor1 << name1 << "           \t" << GREEN << win1 << "     " << RED << lose1 << "     " << GREY << def << "  " << textcolor << "|   " << points1 << endl;
+            cout << BLUE << " 2 | " << figcolor2 << name2 << "           \t" << GREEN << win2 << "     " << RED << lose2 << "     " << GREY << def << "  " << textcolor << "|   " << points2 << endl << endl << endl;
+            cout << BLUE << " 0 | " << textcolor << "Назад\n\n";
+            cin >> usansw;
+
+            if (usansw == 0) {
+                system("cls");
+                continue;
+            }
+            else {
+                system("cls");
+            }
+        }
+
+        //пункт игра
+        if (usansw == 1) {
+            cout << "За кого ходит " << figcolor1 << name1 << textcolor << "?\n\n";
+            cout << BLUE << "| [ 1 ]" << textcolor << " O\n" << BLUE << "| [ 2 ]" << textcolor << " X\n";
+            cout << "Введите цифру: ";
+            cin >> dgt;
+            system("cls");
+            for (int i = 0; i < N; i++)
+            {
+                for (int j = 0; j < N; j++)
+                {
+                    A[i][j] = '?';
+                    cout << A[i][j] << " ";
+                }
+                cout << endl;
+            }
+            for (int i = 0; i < 9; i++)
+            {
+                if ((!(i % 2)) && (dgt == 1)) s = a;
+                if ((!(i % 2)) && (dgt == 2)) s = b;
+                if ((i % 2) && (dgt == 1)) s = b;
+                if ((i % 2) && (dgt == 2)) s = a;
+            mylabel:
+                cout << "Сделайте ваш ход (" << s << ")" << endl;
+                cout << "Строка: ";
+                cin >> x;
+                cout << "Столбец: ";
+                cin >> y;
+                x--;
+                y--;
+                if (A[x][y] != '?')
+                {
+                    system("cls");
+                    for (int i = 0; i < N; i++)
+                    {
+                        for (int j = 0; j < N; j++)
+                        {
+                            cout << A[i][j] << " ";
+                        }
+                        cout << endl;
+                    }
+                    cout << "Данная позиция занята!" << endl;
+                    goto mylabel;
+                }
+                if ((!(i % 2)) && (dgt == 1)) A[x][y] = z;
+                if ((!(i % 2)) && (dgt == 2)) A[x][y] = c;
+                if ((i % 2) && (dgt == 1)) A[x][y] = c;
+                if ((i % 2) && (dgt == 2)) A[x][y] = z;
+                system("cls");
+                k = 0;
+                for (int i = 0; i < N; i++)
+                {
+                    for (int j = 0; j < N; j++)
+                    {
+                        cout << A[i][j] << " ";
+                    }
+                    cout << endl;
+                }
+                if (((A[0][0] == '0') && (A[0][1] == '0') && (A[0][2] == '0')) ||
+                    ((A[1][0] == '0') && (A[1][1] == '0') && (A[1][2] == '0')) ||
+                    ((A[2][0] == '0') && (A[2][1] == '0') && (A[2][2] == '0')) ||
+                    ((A[0][0] == '0') && (A[1][0] == '0') && (A[2][0] == '0')) ||
+                    ((A[0][1] == '0') && (A[1][1] == '0') && (A[2][1] == '0')) ||
+                    ((A[0][2] == '0') && (A[1][2] == '0') && (A[2][2] == '0')) ||
+                    ((A[0][0] == '0') && (A[1][1] == '0') && (A[2][2] == '0')) ||
+                    ((A[2][0] == '0') && (A[1][1] == '0') && (A[0][2] == '0')) ||
+                    ((A[0][0] == 'X') && (A[0][1] == 'X') && (A[0][2] == 'X')) ||
+                    ((A[1][0] == 'X') && (A[1][1] == 'X') && (A[1][2] == 'X')) ||
+                    ((A[2][0] == 'X') && (A[2][1] == 'X') && (A[2][2] == 'X')) ||
+                    ((A[0][0] == 'X') && (A[1][0] == 'X') && (A[2][0] == 'X')) ||
+                    ((A[0][1] == 'X') && (A[1][1] == 'X') && (A[2][1] == 'X')) ||
+                    ((A[0][2] == 'X') && (A[1][2] == 'X') && (A[2][2] == 'X')) ||
+                    ((A[0][0] == 'X') && (A[1][1] == 'X') && (A[2][2] == 'X')) ||
+                    ((A[2][0] == 'X') && (A[1][1] == 'X') && (A[0][2] == 'X')))
+                {
+                    k++;
+                    cout << "Игра закончена! ";
+                    if ((A[x][y] == z) && (dgt == 1)) cout << figcolor1 << name1 << textcolor << " победил(a)!" << endl;
+                    if ((A[x][y] == c) && (dgt == 2)) cout << figcolor1 << name1 << textcolor << " победил(a)!" << endl;
+                    if ((A[x][y] == c) && (dgt == 1)) cout << figcolor2 << name2 << textcolor << " победил(a)!" << endl;
+                    if ((A[x][y] == z) && (dgt == 2)) cout << figcolor2 << name2 << textcolor << " победил(a)!" << endl;
+                    system("pause");
+                    system("cls");
+                    break;
+                }
+            }
+            if (!(k)) cout << "Игра закончилась" << RED << "вничью!" << textcolor << endl;
+            //счёт очков
+
+            //победа первого игрока
+            if ((A[x][y] == z) && (dgt == 1)) {
+                win1 = win1 + 1;
+                lose2 = lose2 + 1;
+                points1 = points1 + 5;
+                points2 = points2 - 6;
+            }
+            else if ((A[x][y] == c) && (dgt == 2)) {
+                win1 = win1 + 1;
+                lose2 = lose2 + 1;
+                points1 = points1 + 5;
+                points2 = points2 - 6;
+            }
+
+            //победа второго игрока
+            else if ((A[x][y] == c) && (dgt == 1)) {
+                win2 = win2 + 1;
+                lose1 = lose1 + 1;
+                points2 = points2 + 5;
+                points1 = points1 - 6;
+            }
+            else if ((A[x][y] == z) && (dgt == 2)) {
+                win2 = win2 + 1;
+                lose1 = lose1 + 1;
+                points2 = points2 + 5;
+                points1 = points1 - 6;
+            }
+            else {
+                def = def + 1;
+                points1 = points1 - 1.2;
+                points2 = points2 - 1.2;
+            }
+        }
+    }
+    return 0;
+}
