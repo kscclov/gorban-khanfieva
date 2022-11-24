@@ -1,0 +1,178 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	setlocale(0, "");
+	int c;
+	int arr[7];
+	int a, b;
+
+	cout << "Проинициализируйте целочисленный массив на 7 элементов:\n\n";
+	for (int i = 0; i < 7; i++) {
+		cout << "[ + ] Инициализация | ячейка " << i << ": ";
+		cin >> arr[i];
+	}
+	cout << "\nВ массив были записаны такие значения:";
+	for (int i = 0; i < 7; i++) {
+		cout << " " << arr[i] << " ";
+	}
+
+	system("pause");
+
+	while (true) {
+		system("cls");
+		bool swapped = false;
+
+		cout << "[+] Настройки массива :\n\n";
+		cout << "[1] Сортировка по возрастанию\n";
+		cout << "[2] Сортировка по убыванию\n";
+		cout << "[3] Перемножить массив\n";
+		cout << "[4] Сложить массив\n";
+		cout << "[5] Разделить массив\n";
+		cout << "[6] Обнулить массив\n\n";
+		cout << "[7] Задать новые значения массиву\n";
+		cout << "[8] Выход из программы\n";
+		cin >> c;
+
+		if (c == 8) {
+			system("cls");
+			return 0;
+		}
+
+		else if (c == 1) {
+			system("cls");
+			cout << "Вы выбрали пункт сортировки массива по возростанию\n\n";
+			for (int i = 0; i < 6; i++) {
+				for (int i = 0; i < 6; i++)
+					if (arr[i] > arr[i + 1]) {
+						b = arr[i];
+						arr[i] = arr[i + 1];
+						arr[i + 1] = b;
+						b = 0;
+					}
+			}
+			cout << "Теперь массив выглядит так";
+			for (int i = 0; i < 7; i++) {
+				cout << " " << arr[i] << " ";
+			}
+			cout << endl;
+			system("pause");
+
+		}
+		else if (c == 2) {
+			system("cls");
+			cout << "Вы выбрали пункт сортировки массива по убыванию\n\n";
+			for (int i = 0; i < 7; i++) {
+				for (int i = 0; i < 7; i++)
+					if (arr[i] < arr[i + 1]) {
+						b = arr[i];
+						arr[i] = arr[i + 1];
+						arr[i + 1] = b;
+						b = 0;
+					}
+			}
+			cout << "Теперь массив выглядит так";
+			for (int i = 0; i < 7; i++) {
+				cout << " " << arr[i] << " ";
+			}
+			cout << endl;
+			system("pause");
+		}
+		else if (c == 3) {
+			system("cls");
+			cout << "Введите число, на которое хотите умножить элементы массива\n\n";
+			cin >> a;
+			cout << "Массив состоял из таких чисел:";
+			for (int i = 0; i < 7; i++) {
+				cout << " " << arr[i] << " ";
+			}
+			cout << "\nВыполнение умножения массива ...\n";
+			for (int i = 0; i < 7; i++) {
+				cout << left << arr[i] << " * " << a << " = " << arr[i] * a << "\n";
+				arr[i] = arr[i] * a;
+			}
+			cout << "Теперь массив состоит из этих чисел:";
+			for (int i = 0; i < 7; i++) {
+				cout << " " << arr[i] << " ";
+			}
+			cout << endl;
+			system("pause");
+
+		}
+		else if (c == 4) {
+			system("cls");
+			cout << "Введите число, которое хотите прибавить к элементам массива\n\n";
+			cin >> a;
+			cout << "Массив состоял из таких чисел:";
+			for (int i = 0; i < 7; i++) {
+				cout << " " << arr[i] << " ";
+			}
+			cout << "\nВыполнение сложения массива ...\n";
+			for (int i = 0; i < 7; i++) {
+				cout << left << arr[i] << " + " << a << " = " << arr[i] + a << "\n";
+				arr[i] = arr[i] + a;
+			}
+			cout << "Теперь массив состоит из этих чисел:";
+			for (int i = 0; i < 7; i++) {
+				cout << " " << arr[i] << " ";
+			}
+			cout << endl;
+			system("pause");
+
+		}
+		else if (c == 5) {
+			system("cls");
+			cout << "Введите число, на которое хотите разделить элементы массива\n\n";
+			cin >> a;
+			cout << "Массив состоял из таких чисел:";
+			for (int i = 0; i < 7; i++) {
+				cout << " " << arr[i] << " ";
+			}
+			cout << "\nВыполнение деления массива ...\n";
+			for (int i = 0; i < 7; i++) {
+				cout << left << arr[i] << " / " << a << " = " << arr[i] / a << "\n";
+				arr[i] = arr[i] / a;
+			}
+			cout << "Теперь массив состоит из этих чисел:";
+			for (int i = 0; i < 7; i++) {
+				cout << " " << arr[i] << " ";
+			}
+			cout << endl;
+			system("pause");
+
+		}
+		else if (c == 6) {
+			system("cls");
+			cout << "Вы выбрали пункт обнуления массива\n\n";
+			for (int i = 0; i < 7; i++) {
+				arr[i] = 0;
+			}
+			cout << "Массив был обнулён и выглядит так:";
+			for (int i = 0; i < 7; i++) {
+				cout << " " << arr[i] << " ";
+			}
+			cout << "\n\nВы можите снова добавить значения в массив выбрав соответствующий пункт\n\n";
+			system("pause");
+		}
+		else if (c == 7) {
+			system("cls");
+
+			cout << "\nПроинициализируйте целочисленный массив на 7 элементов:\n\n";
+			for (int i = 0; i < 7; i++) {
+				cout << "[ + ] Инициализация | ячейка " << i << ": ";
+				cin >> arr[i];
+			}
+			cout << "\nВ массив были записаны такие значения:";
+			for (int i = 0; i < 7; i++) {
+				cout << " " << arr[i] << " ";
+			}
+
+			system("pause");
+		}
+
+		system("cls");
+
+	}
+
+	return 0;
+}
