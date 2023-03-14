@@ -1,0 +1,130 @@
+#include <iostream>
+#include <conio.h>
+using namespace std;
+
+int main() {
+	int x, y, xCoord, yCoord = 0;
+
+	cout << "enter the x-ordinate: ";
+	cin >> x;
+	cout << "enter the y-ordinate:";
+	cin >> y;
+
+	system("cls");
+
+	//двумерный динамическимй массив 
+	string** arr = new string * [y * 2 + 1];
+	for (int i = 0; i < y * 2 + 1; i++)
+	{
+		arr[i] = new string[x * 2 + 1];
+	}
+
+	//коорд плоскость
+	for (int i = 0; i < y * 2 + 1; i++) {
+		if (i != y) {
+			for (int k = 0; k < x * 2 + 1; k++) {
+
+				if (k != x) {
+					arr[i][k] = "  ";
+				}
+				else {
+					arr[i][k] = "| ";
+				}
+			}
+		}
+		else {
+			for (int k = 0; k < x * 2 + 1; k++) {
+				arr[i][k] = "- ";
+			}
+		}
+	}
+	//вывод
+	for (int i = 0; i < y * 2 + 1; i++) {
+		for (int k = 0; k < x * 2 + 1; k++) {
+			cout << arr[i][k];
+		}
+		cout << "\n";
+	}
+	char c = _getch();
+
+	do {
+		while (true) {
+			cout << "\n\nenter point coordinates: \n";
+			cout << "x: ";
+			cin >> xCoord;
+			cout << "y: ";
+			cin >> yCoord;
+
+			//Проверка 
+			if (xCoord > x or yCoord > y) {
+				cout << "\nwrong point coordinate ";
+				continue;
+			}
+			else {
+				break;
+			}
+		}
+		//system("pause");
+		//system("cls");
+
+		cout << "point (" << xCoord << "," << yCoord << ")\n\n";
+
+		//1 четверть
+		if (xCoord >= 0 and yCoord >= 0) {
+			arr[y - yCoord][xCoord + x] = "o ";
+			//ось х
+			for (int i = 1; i < yCoord; i++) {
+				arr[y - yCoord + i][xCoord + x] = "' ";
+			}
+			//ось у
+			for (int i = 1; i < xCoord; i++) {
+				arr[y - yCoord][xCoord + x - i] = "- ";
+			}
+		}
+		//2 четверть
+		else if (xCoord <= 0 and yCoord > 0) {
+			xCoord = abs(xCoord);
+			arr[y - yCoord][x - xCoord] = "o ";
+			for (int i = 1; i < yCoord; i++) {
+				arr[y - yCoord + i][x - xCoord] = "' ";
+			}
+			for (int i = 1; i < xCoord; i++) {
+				arr[y - yCoord][x - xCoord + i] = "- ";
+			}
+		}
+		//3 четверть
+		else if (xCoord < 0 and yCoord <= 0) {
+			xCoord = abs(xCoord);
+			yCoord = abs(yCoord);
+			arr[y + yCoord][x - xCoord] = "o ";
+			for (int i = 1; i < yCoord; i++) {
+				arr[y + yCoord - i][x - xCoord] = "' ";
+			}
+			for (int i = 1; i < xCoord; i++) {
+				arr[y + yCoord][x - xCoord + i] = "- ";
+			}
+		}
+		//4 четверть
+		else if (xCoord > 0 and yCoord < 0) {
+			yCoord = abs(yCoord);
+			arr[y + yCoord][xCoord + x] = "o ";
+			for (int i = 1; i < yCoord; i++) {
+				arr[y + yCoord - i][x + xCoord] = "' ";
+			}
+			for (int i = 1; i < xCoord; i++) {
+				arr[y + yCoord][x + xCoord - i] = "- ";
+			}
+		}
+		//вывод
+		for (int i = 0; i < y * 2 + 1; i++) {
+			for (int j = 0; j < x * 2 + 1; j++) {
+				cout << arr[i][j];
+			}
+			cout << "\n";
+		}
+		cout << "for exit press z, for continue press something else: ";
+		cin >> c;
+	} while (c != 'z');
+	system("cls");
+	return 0;
+}
