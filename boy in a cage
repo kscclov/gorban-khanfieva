@@ -1,0 +1,125 @@
+#include <iostream>
+#include <conio.h>
+#include <cstdio>
+
+FILE* stream;
+
+using namespace std;
+
+int main() {
+	int x, y, x1, y1;
+	char click;
+
+	cout << "enter field lenght: ";
+	cin >> x;
+	cout << "enter field height: ";
+	cin >> y;
+	system("cls");
+
+
+	x = abs(x);
+	y = abs(y);
+
+	//двумерный динамический массив
+	string** arr = new string * [y + 2];
+	for (int i = 0; i < y + 2; i++)
+	{
+		arr[i] = new string[x + 2];
+	}
+	//поле
+	for (int i = 0; i < y + 2; i++) {
+		if (i == 0 or i == y + 1) {
+			for (int j = 0; j < x + 2; j++) {
+				arr[i][j] = "$ ";
+			}
+		}
+		else {
+			for (int j = 0; j < x + 2; j++) {
+				if (j == 0 or j == x + 1) {
+					arr[i][j] = "$ ";
+				}
+				else {
+					arr[i][j] = "  ";
+				}
+			}
+		}
+	}
+	//точка
+	y1 = (y + 1) / 2;
+	x1 = (x + 1) / 2;
+	arr[y1][x1] = "+ ";
+
+	do {
+		string m = "";
+		// Вывод массива
+		for (int i = 0; i < y + 2; i++) {
+			for (int j = 0; j < x + 2; j++) {
+				m = m + arr[i][j];
+			}
+			m = m + "\n";
+		}
+		cout << m;
+
+		cout << "click 'wasd' to move\nfor exit click esc";
+		click = _getch();
+
+		switch (click) {
+		//w
+		case 'W':
+		case 'w':
+		{
+			if (y1 - 1 == 0) {
+				break;
+			}
+			else {
+				arr[y1][x1] = "  ";
+				y1 = y1 - 1;
+				arr[y1][x1] = "+ ";
+				break;
+			}
+		}
+		//s
+		case 'S':
+		case 's': {
+			if (y1 + 1 == y + 1) {
+				break;
+			}
+			else {
+				arr[y1][x1] = "  ";
+				y1 = y1 + 1;
+				arr[y1][x1] = "+ ";
+				break;
+			}
+		}
+		//d
+		case 'D':
+		case 'd': {
+			if (x1 + 1 == x + 1) {
+				break;
+			}
+			else {
+				arr[y1][x1] = "  ";
+				x1 = x1 + 1;
+				arr[y1][x1] = "+ ";
+				break;
+			}
+		}
+		//a
+		case 'A':
+		case 'a': {
+			if (x1 - 1 == 0) {
+				break;
+			}
+			else {
+				arr[y1][x1] = "  ";
+				x1 = x1 - 1;
+				arr[y1][x1] = "+ ";
+				break;
+			}
+		}
+		default:
+			break;
+		}
+		system("cls");
+	} while (click != '\033');
+}
