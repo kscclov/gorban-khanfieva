@@ -6,8 +6,16 @@ FILE* stream;
 
 using namespace std;
 
+int Random(int min, int max) {
+	srand(time(NULL));
+	int num = min + rand() % (max - min + 1);
+	return num;
+}
+
 int main() {
-	int x, y, x1, y1;
+	int x, y, x1, y1, x2, y2, toch = 0, score = 0;
+	string BLUE = "\x1b[36m";
+	string textc = "\x1b[0m";
 	char click;
 
 	cout << "enter field lenght: ";
@@ -44,14 +52,22 @@ int main() {
 			}
 		}
 	}
-	//точка
+	//точка в центре
 	y1 = (y + 1) / 2;
 	x1 = (x + 1) / 2;
 	arr[y1][x1] = "+ ";
 
 	do {
+		while (toch < 1) {
+			y2 = Random(1, y - 1);
+			x2 = Random(1, x - 1);
+			if (arr[y2][x2] != "+ " and arr[y2][x2] != "# ") {
+				arr[y2][x2] = "\x1b[36m x\x1b[0m";
+				toch = 1;
+			}
+		}
 		string m = "";
-		// Вывод массива
+		//массив
 		for (int i = 0; i < y + 2; i++) {
 			for (int j = 0; j < x + 2; j++) {
 				m = m + arr[i][j];
@@ -60,9 +76,10 @@ int main() {
 		}
 		cout << m;
 
-		cout << "click 'wasd' to move\nfor exit click esc";
-		click = _getch();
+		cout << "click 'wasd' to move\npoints [ " << BLUE << score << textc << " ]\n\n\n\n";
+		cout << "for exit press esc";
 
+		click = _getch();
 		switch (click) {
 		//w
 		case 'W':
@@ -121,5 +138,11 @@ int main() {
 			break;
 		}
 		system("cls");
+
+		if (x1 == x2 and y1 == y2) {
+			toch = 0;
+			score += 1;
+		}
+
 	} while (click != '\033');
 }
