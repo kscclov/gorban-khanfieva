@@ -1,0 +1,516 @@
+#include <iostream>
+#include <conio.h>
+#include <cstdio>
+#include <time.h>
+#include <stdlib.h>
+#include <Windows.h>
+#include <thread>
+
+using namespace std;
+
+// Рандом 
+int Random(int min, int max) {
+	int num = min + rand() % (max - min + 1);
+	return num;
+}
+
+// Скрыть курсор
+void hidecursor()
+{
+	HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+	CONSOLE_CURSOR_INFO info;
+	info.dwSize = 100;
+	info.bVisible = FALSE;
+	SetConsoleCursorInfo(consoleHandle, &info);
+}
+
+// Ход
+void mov(std::promise<int> &&a) {
+	a = _getch();
+}
+
+int main() {
+	int x, y, x1, y1, x2, y2, x3 = 0, y3 = 0, color, buf1, buf2, kol = 0, type, size, key = 0, score = 0, score2 = 0, toch = 0, toch2 = 0, x_second = 0, y_second = 0, x_second_ch, y_second_ch, exit = 0;
+	int comp_x, comp_y, place, live1 = 1, live2 = 1;
+	hidecursor();
+	string const GREEN = "\x1B[92m";
+	string const BLUE = "\x1B[94m";
+	string const WHITE = "\x1B[97m";
+	string const YELLOW = "\x1B[93m";
+	string const MAGENT = "\x1B[95m";
+	string const CYAN = "\x1B[91m";
+	string const GRAY = "\x1B[90m";
+
+	std::promise<int> a;
+	auto f = p.get_future();
+	
+
+	HANDLE hd = GetStdHandle(STD_OUTPUT_HANDLE);
+	COORD cd;
+	cd.X = 0;
+	cd.Y = 0;
+
+	setlocale(0, "");
+
+	// Ввод X и Y карты
+	cout << "Введите X карты - ";
+	cin >> x;
+	cout << "Введите Y карты - ";
+	cin >> y;
+
+	x = abs(x);
+	y = abs(y);
+
+	// Создание двумерного динамического массива 
+	string** arr = new string * [y + 2];
+	for (int i = 0; i < y + 2; i++)
+	{
+		arr[i] = new string[x + 2];
+	}
+
+	// Запись в массив координатной плоскости
+	for (int i = 0; i < y + 2; i++) {
+		if (i == 0 or i == y + 1) {
+			for (int j = 0; j < x + 2; j++) {
+				arr[i][j] = "# ";
+			}
+		}
+		else {
+			for (int j = 0; j < x + 2; j++) {
+				if (j == 0 or j == x + 1) {
+					arr[i][j] = "# ";
+				}
+				else {
+					arr[i][j] = "  ";
+				}
+			}
+		}
+	}
+	// Спавн препядствий 
+
+	for (int i = 1; i < y + 1; i++) {
+		for (int j = 1; j < x + 1; j++) {
+			type = Random(1, 10);
+			if (type == 2 or type == 1) {
+				arr[i][j] = GREEN + "# " + WHITE;
+			}
+			else if (type == 3) {
+				arr[i][j] = BLUE + "# " + WHITE;
+			}
+			else {
+				arr[i][j] = "  ";
+			}
+		}
+	}
+
+	//Спавн игроков 
+	y1 = y;
+	x1 = x;
+	arr[y1][x1] = MAGENT + "* " + WHITE;
+
+	x_second = 1;
+	y_second = 1;
+	arr[y_second][x_second] = YELLOW + "* " + WHITE;
+
+	//Спавн компа	
+	comp_y = y / 2;
+	comp_x = x / 2;
+	arr[comp_y][comp_x] = GRAY + "* " + WHITE;
+
+	while (true) {
+
+		hidecursor();
+		SetConsoleCursorPosition(hd, cd);
+
+		// Спавн предмета для первого игрока 
+		while (toch < 1) {
+			y2 = Random(1, y);
+			x2 = Random(1, x);
+			if (arr[y2][x2] != YELLOW + "* " + WHITE and arr[y2][x2] != MAGENT + "* " + WHITE and arr[y2][x2] != GREEN + "# " + WHITE and arr[y2][x2] != BLUE + "# " + WHITE and arr[y2][x2] != YELLOW + "$ " + WHITE and arr[y2][x2] != CYAN + "# " + WHITE and arr[y2][x2] != CYAN + "- " + WHITE and arr[y2][x2] != CYAN + "| " + WHITE) {
+				arr[y2][x2] = MAGENT + "$ " + WHITE;
+				toch = 1;
+			}
+		}
+
+		// Спавн предмета для второго игрока 
+		while (toch2 < 1) {
+			y_second_ch = Random(1, y);
+			x_second_ch = Random(1, x);
+			if (arr[y_second_ch][x_second_ch] != YELLOW + "* " + WHITE and arr[y_second_ch][x_second_ch] != MAGENT + "* " + WHITE and arr[y_second_ch][x_second_ch] != MAGENT + "$ " + WHITE and arr[y_second_ch][x_second_ch] != GREEN + "# " + WHITE and arr[y_second_ch][x_second_ch] != BLUE + "# " + WHITE and arr[y_second_ch][x_second_ch] != CYAN + "# " + WHITE and arr[y_second_ch][x_second_ch] != CYAN + "- " + WHITE and arr[y_second_ch][x_second_ch] != CYAN + "| " + WHITE) {
+				arr[y_second_ch][x_second_ch] = YELLOW + "$ " + WHITE;
+				toch2 = 1;
+			}
+		}
+
+		// Вывод массива
+		for (int i = 0; i < y + 2; i++) {
+			for (int j = 0; j < x + 2; j++) {
+				cout << arr[i][j];
+			}
+			cout << endl;
+		}
+
+		//Ход
+		cout << "Сделайте ход\n" << "Счёт первого игрока - " << MAGENT << score << WHITE << "\n" << "Счёт второго игрока - " << YELLOW << score2 << WHITE << "\n";
+		thread t(&mov, move(p));
+		Sleep(1000);
+	 
+		t.join;
+
+		switch (key)
+		{
+
+			//Вверх второй игрок
+		case 119:
+		case 66:
+		case 150:
+		case 230:
+		{
+			if (live2 == 0 or (arr[y_second - 1][x_second] == CYAN + "- " + WHITE and score2 < 10) or arr[y_second - 1][x_second] == CYAN + "# " + WHITE or arr[y_second - 1][x_second] == MAGENT + "$ " + WHITE or (y_second - 1 == 0 or arr[y_second - 1][x_second] == GREEN + "# " + WHITE) or ((arr[y_second - 2][x_second] == YELLOW + "$ " + WHITE or arr[y_second - 2][x_second] == MAGENT + "$ " + WHITE or arr[y_second - 2][x_second] == CYAN + "- " + WHITE or arr[y_second - 2][x_second] == CYAN + "| " + WHITE or arr[y_second - 2][x_second] == CYAN + "# " + WHITE or arr[y_second - 2][x_second] == GREEN + "# " + WHITE or arr[y_second - 2][x_second] == "# " or arr[y_second - 2][x_second] == BLUE + "# " + WHITE or arr[y_second - 2][x_second] == MAGENT + "* " + WHITE or arr[y_second - 2][x_second] == GRAY + "* " + WHITE) and arr[y_second - 1][x_second] == BLUE + "# " + WHITE)) {
+				break;
+			}
+			else if (arr[y_second - 1][x_second] == BLUE + "# " + WHITE and arr[y_second - 2][x_second] != GREEN + "# " + WHITE and arr[y_second - 2][x_second] != "# ") {
+				arr[y_second][x_second] = "  ";
+				y_second = y_second - 1;
+				arr[y_second][x_second] = YELLOW + "* " + WHITE;
+				arr[y_second - 1][x_second] = BLUE + "# " + WHITE;
+				break;
+			}
+			else {
+				arr[y_second][x_second] = "  ";
+				y_second = y_second - 1;
+				arr[y_second][x_second] = YELLOW + "* " + WHITE;
+				break;
+			}
+		}
+		//Вверх
+		case 72:
+		{
+			if (live1 == 0 or (arr[y1 - 1][x1] == CYAN + "- " + WHITE and score < 10) or arr[y1 - 1][x1] == CYAN + "# " + WHITE or arr[y1 - 1][x1] == YELLOW + "$ " + WHITE or (y1 - 1 == 0 or arr[y1 - 1][x1] == GREEN + "# " + WHITE) or ((arr[y1 - 2][x1] == MAGENT + "$ " + WHITE or arr[y1 - 2][x1] == YELLOW + "$ " + WHITE or arr[y1 - 2][x1] == CYAN + "- " + WHITE or arr[y1 - 2][x1] == CYAN + "| " + WHITE or arr[y1 - 2][x1] == CYAN + "# " + WHITE or arr[y1 - 2][x1] == GREEN + "# " + WHITE or arr[y1 - 2][x1] == "# " or arr[y1 - 2][x1] == BLUE + "# " + WHITE or arr[y1 - 2][x1] == YELLOW + "* " + WHITE or arr[y1 - 2][x1] == GRAY + "* " + WHITE) and arr[y1 - 1][x1] == BLUE + "# " + WHITE)) {
+				break;
+			}
+			else if (arr[y1 - 1][x1] == BLUE + "# " + WHITE and arr[y1 - 2][x1] != GREEN + "# " + WHITE and arr[y1 - 2][x1] != "# ") {
+				arr[y1][x1] = "  ";
+				y1 = y1 - 1;
+				arr[y1][x1] = MAGENT + "* " + WHITE;;
+				arr[y1 - 1][x1] = BLUE + "# " + WHITE;
+				break;
+			}
+			else {
+				arr[y1][x1] = "  ";
+				y1 = y1 - 1;
+				arr[y1][x1] = MAGENT + "* " + WHITE;;
+				break;
+			}
+		}
+		//Вниз второго игрока
+		case 115:
+		case 83:
+		case 155:
+		case 235:
+		{
+			if (live2 == 0 or (arr[y_second + 1][x_second] == CYAN + "- " + WHITE and score2 < 10) or arr[y_second + 1][x_second] == CYAN + "# " + WHITE or arr[y_second + 1][x_second] == MAGENT + "$ " + WHITE or (y_second + 1 == y + 1 or arr[y_second + 1][x_second] == GREEN + "# " + WHITE) or ((arr[y_second + 2][x_second] == MAGENT + "$ " + WHITE or arr[y_second + 2][x_second] == YELLOW + "$ " + WHITE or arr[y_second + 2][x_second] == CYAN + "- " + WHITE or arr[y_second + 2][x_second] == CYAN + "| " + WHITE or arr[y_second + 2][x_second] == CYAN + "# " + WHITE or arr[y_second + 2][x_second] == GREEN + "# " + WHITE or arr[y_second + 2][x_second] == "# " or arr[y_second + 2][x_second] == BLUE + "# " + WHITE or arr[y_second + 2][x_second] == MAGENT + "* " + WHITE or arr[y_second + 2][x_second] == GRAY + "* " + WHITE) and arr[y_second + 1][x_second] == BLUE + "# " + WHITE)) {
+				break;
+			}
+			else if (arr[y_second + 1][x_second] == BLUE + "# " + WHITE and arr[y_second + 2][x_second] != GREEN + "# " + WHITE and arr[y_second + 2][x_second] != "# ") {
+				arr[y_second][x_second] = "  ";
+				y_second = y_second + 1;
+				arr[y_second][x_second] = YELLOW + "* " + WHITE;
+				arr[y_second + 1][x_second] = BLUE + "# " + WHITE;
+				break;
+			}
+			else {
+				arr[y_second][x_second] = "  ";
+				y_second = y_second + 1;
+				arr[y_second][x_second] = YELLOW + "* " + WHITE;
+				break;
+			}
+		}
+		//Вниз
+		case 80:
+		{
+			if (live1 == 0 or (arr[y1 + 1][x1] == CYAN + "- " + WHITE and score < 10) or arr[y1 + 1][x1] == CYAN + "# " + WHITE or arr[y1 + 1][x1] == YELLOW + "$ " + WHITE or (y1 + 1 == y + 1 or arr[y1 + 1][x1] == GREEN + "# " + WHITE) or ((arr[y1 + 2][x1] == MAGENT + "$ " + WHITE or arr[y1 + 2][x1] == YELLOW + "$ " + WHITE or arr[y1 + 2][x1] == CYAN + "- " + WHITE or arr[y1 + 2][x1] == CYAN + "| " + WHITE or arr[y1 + 2][x1] == CYAN + "# " + WHITE or arr[y1 + 2][x1] == GREEN + "# " + WHITE or arr[y1 + 2][x1] == "# " or arr[y1 + 2][x1] == BLUE + "# " + WHITE or arr[y1 + 2][x1] == YELLOW + "* " + WHITE or arr[y1 + 2][x1] == GRAY + "* " + WHITE) and arr[y1 + 1][x1] == BLUE + "# " + WHITE)) {
+				break;
+			}
+			else if (arr[y1 + 1][x1] == BLUE + "# " + WHITE and arr[y1 + 2][x1] != GREEN + "# " + WHITE and arr[y1 + 2][x1] != "# ") {
+				arr[y1][x1] = "  ";
+				y1 = y1 + 1;
+				arr[y1][x1] = MAGENT + "* " + WHITE;;
+				arr[y1 + 1][x1] = BLUE + "# " + WHITE;
+				break;
+			}
+			else {
+				arr[y1][x1] = "  ";
+				y1 = y1 + 1;
+				arr[y1][x1] = MAGENT + "* " + WHITE;;
+				break;
+			}
+		}
+		//Вправо
+		case 77:
+		{
+			if (live1 == 0 or (arr[y1][x1 + 1] == CYAN + "| " + WHITE and score < 10) or arr[y1][x1 + 1] == CYAN + "# " + WHITE or arr[y1][x1 + 1] == YELLOW + "$ " + WHITE or (x1 + 1 == x + 1 or arr[y1][x1 + 1] == GREEN + "# " + WHITE) or ((arr[y1][x1 + 2] == YELLOW + "$ " + WHITE or arr[y1][x1 + 2] == MAGENT + "$ " + WHITE or arr[y1][x1 + 2] == CYAN + "- " + WHITE or arr[y1][x1 + 2] == CYAN + "| " + WHITE or arr[y1][x1 + 2] == CYAN + "# " + WHITE or arr[y1][x1 + 2] == GREEN + "# " + WHITE or arr[y1][x1 + 2] == "# " or arr[y1][x1 + 2] == BLUE + "# " + WHITE or arr[y1][x1 + 2] == YELLOW + "* " + WHITE or arr[y1][x1 + 2] == GRAY + "* " + WHITE) and arr[y1][x1 + 1] == BLUE + "# " + WHITE)) {
+				break;
+			}
+			else if (arr[y1][x1 + 1] == BLUE + "# " + WHITE and arr[y1][x1 + 2] != GREEN + "# " + WHITE and arr[y1][x1 + 2] != "# ") {
+				arr[y1][x1] = "  ";
+				x1 = x1 + 1;
+				arr[y1][x1] = MAGENT + "* " + WHITE;
+				arr[y1][x1 + 1] = BLUE + "# " + WHITE;
+				break;
+			}
+			else {
+				arr[y1][x1] = "  ";
+				x1 = x1 + 1;
+				arr[y1][x1] = MAGENT + "* " + WHITE;;
+				break;
+			}
+		}
+		//Вправо второго игрока
+		case 100:
+		case 47:
+		case 130:
+		case 162:
+		{
+			if (live2 == 0 or (arr[y_second][x_second + 1] == CYAN + "| " + WHITE and score2 < 10) or arr[y_second][x_second + 1] == CYAN + "# " + WHITE or arr[y_second][x_second + 1] == MAGENT + "$ " + WHITE or (x_second + 1 == x + 1 or arr[y_second][x_second + 1] == GREEN + "# " + WHITE) or ((arr[y_second][x_second + 2] == MAGENT + "$ " + WHITE or arr[y_second][x_second + 2] == YELLOW + "$ " + WHITE or arr[y_second][x_second + 2] == CYAN + "- " + WHITE or arr[y_second][x_second + 2] == CYAN + "| " + WHITE or arr[y_second][x_second + 2] == CYAN + "# " + WHITE or arr[y_second][x_second + 2] == GREEN + "# " + WHITE or arr[y_second][x_second + 2] == "# " or arr[y_second][x_second + 2] == BLUE + "# " + WHITE or arr[y_second][x_second + 2] == MAGENT + "* " + WHITE or arr[y_second][x_second + 2] == GRAY + "* " + WHITE) and arr[y_second][x_second + 1] == BLUE + "# " + WHITE)) {
+				break;
+			}
+			else if (arr[y_second][x_second + 1] == BLUE + "# " + WHITE and arr[y_second][x_second + 2] != GREEN + "# " + WHITE and arr[y_second][x_second + 2] != "# ") {
+				arr[y_second][x_second] = "  ";
+				x_second = x_second + 1;
+				arr[y_second][x_second] = YELLOW + "* " + WHITE;
+				arr[y_second][x_second + 1] = BLUE + "# " + WHITE;
+				break;
+			}
+			else {
+				arr[y_second][x_second] = "  ";
+				x_second = x_second + 1;
+				arr[y_second][x_second] = YELLOW + "* " + WHITE;
+				break;
+			}
+		}
+		//Влево второго игрока
+		case 97:
+		case 65:
+		case 148:
+		case 228:
+		{
+			if (live2 == 0 or (arr[y_second][x_second - 1] == CYAN + "| " + WHITE and score2 < 10) or arr[y_second][x_second - 1] == CYAN + "# " + WHITE or arr[y_second][x_second - 1] == MAGENT + "$ " + WHITE or (x_second - 1 == 0 or arr[y_second][x_second - 1] == GREEN + "# " + WHITE) or ((arr[y_second][x_second - 2] == MAGENT + "$ " + WHITE or arr[y_second][x_second - 2] == YELLOW + "$ " + WHITE or arr[y_second][x_second - 2] == CYAN + "- " + WHITE or arr[y_second][x_second - 2] == CYAN + "| " + WHITE or arr[y_second][x_second - 2] == CYAN + "# " + WHITE or arr[y_second][x_second - 2] == GREEN + "# " + WHITE or arr[y_second][x_second - 2] == "# " or arr[y_second][x_second - 2] == BLUE + "# " + WHITE or arr[y_second][x_second - 2] == MAGENT + "* " + WHITE or arr[y_second][x_second - 2] == GRAY + "* " + WHITE) and arr[y_second][x_second - 1] == BLUE + "# " + WHITE)) {
+				break;
+			}
+			else if (arr[y_second][x_second - 1] == BLUE + "# " + WHITE and arr[y_second][x_second - 2] != GREEN + "# " + WHITE and arr[y_second][x_second - 2] != "# ") {
+				arr[y_second][x_second] = "  ";
+				x_second = x_second - 1;
+				arr[y_second][x_second] = YELLOW + "* " + WHITE;
+				arr[y_second][x_second - 1] = BLUE + "# " + WHITE;
+				break;
+			}
+			else {
+				arr[y_second][x_second] = "  ";
+				x_second = x_second - 1;
+				arr[y_second][x_second] = YELLOW + "* " + WHITE;
+				break;
+			}
+		}
+		//Влево
+		case 75:
+		{
+			if (live1 == 0 or (arr[y1][x1 - 1] == CYAN + "| " + WHITE and score < 10) or arr[y1][x1 - 1] == CYAN + "# " + WHITE or arr[y1][x1 - 1] == YELLOW + "$ " + WHITE or (x1 - 1 == 0 or arr[y1][x1 - 1] == GREEN + "# " + WHITE) or ((arr[y1][x1 - 2] == MAGENT + "$ " + WHITE or arr[y1][x1 - 2] == YELLOW + "$ " + WHITE or arr[y1][x1 - 2] == CYAN + "- " + WHITE or arr[y1][x1 - 2] == CYAN + "| " + WHITE or arr[y1][x1 - 2] == CYAN + "# " + WHITE or arr[y1][x1 - 2] == GREEN + "# " + WHITE or arr[y1][x1 - 2] == "# " or arr[y1][x1 - 2] == BLUE + "# " + WHITE or arr[y1][x1 - 2] == YELLOW + "* " + WHITE or arr[y1][x1 - 2] == GRAY + "* " + WHITE) and arr[y1][x1 - 1] == BLUE + "# " + WHITE)) {
+				break;
+			}
+			else if (arr[y1][x1 - 1] == BLUE + "# " + WHITE and arr[y1][x1 - 2] != GREEN + "# " + WHITE and arr[y1][x1 - 2] != "# ") {
+				arr[y1][x1] = "  ";
+				x1 = x1 - 1;
+				arr[y1][x1] = MAGENT + "* " + WHITE;
+				arr[y1][x1 - 1] = BLUE + "# " + WHITE;
+				break;
+			}
+			else {
+				arr[y1][x1] = "  ";
+				x1 = x1 - 1;
+				arr[y1][x1] = MAGENT + "* " + WHITE;
+				break;
+			}
+		}
+		default:
+			break;
+		}
+
+		//Ход компа 
+		place = Random(1, 4);
+		switch (place)
+		{
+			//Влево
+		case 1:
+			if ((arr[comp_y][comp_x - 1] == CYAN + "| " + WHITE) or arr[comp_y][comp_x - 1] == CYAN + "# " + WHITE or arr[comp_y][comp_x - 1] == MAGENT + "$ " + WHITE or (comp_x - 1 == 0 or arr[comp_y][comp_x - 1] == GREEN + "# " + WHITE) or ((arr[comp_y][comp_x - 2] == MAGENT + "$ " + WHITE or arr[comp_y][comp_x - 2] == YELLOW + "$ " + WHITE or arr[comp_y][comp_x - 2] == CYAN + "- " + WHITE or arr[comp_y][comp_x - 2] == CYAN + "| " + WHITE or arr[comp_y][comp_x - 2] == CYAN + "# " + WHITE or arr[comp_y][comp_x - 2] == GREEN + "# " + WHITE or arr[comp_y][comp_x - 2] == "# " or arr[comp_y][comp_x - 2] == BLUE + "# " + WHITE or arr[comp_y][comp_x - 2] == MAGENT + "* " + WHITE or arr[comp_y][comp_x - 2] == YELLOW + "* " + WHITE) and arr[comp_y][comp_x - 1] == BLUE + "# " + WHITE)) {
+				break;
+			}
+			else if (arr[comp_y][comp_x - 1] == BLUE + "# " + WHITE and arr[comp_y][comp_x - 2] != GREEN + "# " + WHITE and arr[comp_y][comp_x - 2] != "# ") {
+				arr[comp_y][comp_x] = "  ";
+				comp_x = comp_x - 1;
+				arr[comp_y][comp_x] = GRAY + "* " + WHITE;
+				arr[comp_y][comp_x - 1] = BLUE + "# " + WHITE;
+				break;
+			}
+			else {
+				arr[comp_y][comp_x] = "  ";
+				comp_x = comp_x - 1;
+				arr[comp_y][comp_x] = GRAY + "* " + WHITE;
+				break;
+			}
+
+			break;
+			//Вправо
+		case 2:
+			if ((arr[comp_y][comp_x + 1] == CYAN + "| " + WHITE) or arr[comp_y][comp_x + 1] == CYAN + "# " + WHITE or arr[comp_y][comp_x + 1] == MAGENT + "$ " + WHITE or (comp_x + 1 == x + 1 or arr[comp_y][comp_x + 1] == GREEN + "# " + WHITE) or ((arr[comp_y][comp_x + 2] == MAGENT + "$ " + WHITE or arr[comp_y][comp_x + 2] == YELLOW + "$ " + WHITE or arr[comp_y][comp_x + 2] == CYAN + "- " + WHITE or arr[comp_y][comp_x + 2] == CYAN + "| " + WHITE or arr[comp_y][comp_x + 2] == CYAN + "# " + WHITE or arr[comp_y][comp_x + 2] == GREEN + "# " + WHITE or arr[comp_y][comp_x + 2] == "# " or arr[comp_y][comp_x + 2] == BLUE + "# " + WHITE or arr[comp_y][comp_x + 2] == MAGENT + "* " + WHITE or arr[comp_y][comp_x + 2] == YELLOW + "* " + WHITE) and arr[comp_y][comp_x + 1] == BLUE + "# " + WHITE)) {
+				break;
+			}
+			else if (arr[comp_y][comp_x + 1] == BLUE + "# " + WHITE and arr[comp_y][comp_x + 2] != GREEN + "# " + WHITE and arr[comp_y][comp_x + 2] != "# ") {
+				arr[comp_y][comp_x] = "  ";
+				comp_x = comp_x + 1;
+				arr[comp_y][comp_x] = GRAY + "* " + WHITE;
+				arr[comp_y][comp_x + 1] = BLUE + "# " + WHITE;
+				break;
+			}
+			else {
+				arr[comp_y][comp_x] = "  ";
+				comp_x = comp_x + 1;
+				arr[comp_y][comp_x] = GRAY + "* " + WHITE;
+				break;
+			}
+			break;
+			//Вниз
+		case 3:
+			if ((arr[comp_y + 1][comp_x] == CYAN + "- " + WHITE) or arr[comp_y + 1][comp_x] == CYAN + "# " + WHITE or arr[comp_y + 1][comp_x] == YELLOW + "$ " + WHITE or (comp_y + 1 == y + 1 or arr[comp_y + 1][comp_x] == GREEN + "# " + WHITE) or ((arr[comp_y + 2][comp_x] == MAGENT + "$ " + WHITE or arr[comp_y + 2][comp_x] == YELLOW + "$ " + WHITE or arr[comp_y + 2][comp_x] == CYAN + "- " + WHITE or arr[comp_y + 2][comp_x] == CYAN + "| " + WHITE or arr[comp_y + 2][comp_x] == CYAN + "# " + WHITE or arr[comp_y + 2][comp_x] == GREEN + "# " + WHITE or arr[comp_y + 2][comp_x] == "# " or arr[comp_y + 2][comp_x] == BLUE + "# " + WHITE or arr[comp_y + 2][comp_x] == YELLOW + "* " + WHITE or arr[comp_y + 2][comp_x] == MAGENT + "* " + WHITE) and arr[comp_y + 1][comp_x] == BLUE + "# " + WHITE)) {
+				break;
+			}
+			else if (arr[comp_y + 1][comp_x] == BLUE + "# " + WHITE and arr[comp_y + 2][comp_x] != GREEN + "# " + WHITE and arr[comp_y + 2][comp_x] != "# ") {
+				arr[comp_y][comp_x] = "  ";
+				comp_y = comp_y + 1;
+				arr[comp_y][comp_x] = GRAY + "* " + WHITE;;
+				arr[comp_y + 1][comp_x] = BLUE + "# " + WHITE;
+				break;
+			}
+			else {
+				arr[comp_y][comp_x] = "  ";
+				comp_y = comp_y + 1;
+				arr[comp_y][comp_x] = GRAY + "* " + WHITE;;
+				break;
+			}
+			break;
+			//Вверх
+		case 4:
+			if ((arr[comp_y - 1][comp_x] == CYAN + "- " + WHITE) or arr[comp_y - 1][comp_x] == CYAN + "# " + WHITE or arr[comp_y - 1][comp_x] == YELLOW + "$ " + WHITE or (comp_y - 1 == 0 or arr[comp_y - 1][comp_x] == GREEN + "# " + WHITE) or ((arr[comp_y - 2][comp_x] == MAGENT + "$ " + WHITE or arr[comp_y - 2][comp_x] == YELLOW + "$ " + WHITE or arr[comp_y - 2][comp_x] == CYAN + "- " + WHITE or arr[comp_y - 2][comp_x] == CYAN + "| " + WHITE or arr[comp_y - 2][comp_x] == CYAN + "# " + WHITE or arr[comp_y - 2][comp_x] == GREEN + "# " + WHITE or arr[comp_y - 2][comp_x] == "# " or arr[comp_y - 2][comp_x] == BLUE + "# " + WHITE or arr[comp_y - 2][comp_x] == YELLOW + "* " + WHITE or arr[comp_y - 2][comp_x] == MAGENT + "* " + WHITE) and arr[comp_y - 1][comp_x] == BLUE + "# " + WHITE)) {
+				break;
+			}
+			else if (arr[comp_y - 1][comp_x] == BLUE + "# " + WHITE and arr[comp_y - 2][comp_x] != GREEN + "# " + WHITE and arr[comp_y - 2][comp_x] != "# ") {
+				arr[comp_y][comp_x] = "  ";
+				comp_y = comp_y - 1;
+				arr[comp_y][comp_x] = GRAY + "* " + WHITE;;
+				arr[comp_y - 1][comp_x] = BLUE + "# " + WHITE;
+				break;
+			}
+			else {
+				arr[comp_y][comp_x] = "  ";
+				comp_y = comp_y - 1;
+				arr[comp_y][comp_x] = GRAY + "* " + WHITE;;
+				break;
+			}
+			break;
+		}
+
+		//проверка для первого игрока  
+		if (x1 == x2 and y1 == y2) {
+			toch = 0;
+			score += 1;
+		}
+		//проверка для второго игрока  
+		if (x_second == x_second_ch and y_second == y_second_ch) {
+			toch2 = 0;
+			score2 += 1;
+		}
+		// Если оба стоят на одной клетке 
+		if (x1 == x_second and y1 == y_second and live1 == 1 and live2 == 1) {
+			arr[y1][x1] = CYAN + "& " + WHITE;
+		}
+		//Если комп съел игрока 
+		if (comp_y == y1 and comp_x == x1) {
+			live1 = 0;
+			cout << MAGENT << "Игрока 1 съели" << WHITE;
+		}
+		if (comp_y == y_second and comp_x == x_second) {
+			live2 = 0;
+			cout << YELLOW << "Игрока 2 съели" << WHITE;
+		}
+		if (live1 == 0 and live2 == 0) {
+			cout << CYAN << "Конец игры" << WHITE;
+			break;
+		}
+
+		// Спавн ворот 
+		if (exit == 0) {
+			if (score == 8 or score2 == 8) {
+				//Ворота сверху
+				arr[0][(x - 1) / 2 + 1] = "  ";
+				arr[0][(x - 1) / 2 + 2] = CYAN + "# " + WHITE;
+				arr[0][(x - 1) / 2] = CYAN + "# " + WHITE;
+				arr[1][(x - 1) / 2 + 1] = CYAN + "- " + WHITE;
+				arr[2][(x - 1) / 2 + 1] = "  ";
+				arr[2][(x - 1) / 2 + 2] = "  ";
+				arr[2][(x - 1) / 2] = "  ";
+				arr[1][(x - 1) / 2 + 2] = CYAN + "# " + WHITE;
+				arr[1][(x - 1) / 2] = CYAN + "# " + WHITE;
+				//Ворота внизу
+				arr[y + 1][(x - 1) / 2 + 1] = "  ";
+				arr[y + 1][(x - 1) / 2 + 2] = CYAN + "# " + WHITE;
+				arr[y + 1][(x - 1) / 2] = CYAN + "# " + WHITE;
+				arr[y][(x - 1) / 2 + 1] = CYAN + "- " + WHITE;
+				arr[y - 1][(x - 1) / 2 + 1] = "  ";
+				arr[y - 1][(x - 1) / 2 + 2] = "  ";
+				arr[y - 1][(x - 1) / 2] = "  ";
+				arr[y][(x - 1) / 2 + 2] = CYAN + "# " + WHITE;
+				arr[y][(x - 1) / 2] = CYAN + "# " + WHITE;
+				//Ворота справа
+				arr[(y - 1) / 2 + 1][x + 1] = "  ";
+				arr[(y - 1) / 2 + 2][x + 1] = CYAN + "# " + WHITE;
+				arr[(y - 1) / 2][x + 1] = CYAN + "# " + WHITE;
+				arr[(y - 1) / 2 + 1][x] = CYAN + "| " + WHITE;
+				arr[(y - 1) / 2 + 1][x - 1] = "  ";
+				arr[(y - 1) / 2 + 2][x - 1] = "  ";
+				arr[(y - 1) / 2][x - 1] = "  ";
+				arr[(y - 1) / 2 + 2][x] = CYAN + "# " + WHITE;
+				arr[(y - 1) / 2][x] = CYAN + "# " + WHITE;
+				//Ворота слева
+				arr[(y - 1) / 2 + 1][0] = "  ";
+				arr[(y - 1) / 2 + 2][0] = CYAN + "# " + WHITE;
+				arr[(y - 1) / 2][0] = CYAN + "# " + WHITE;
+				arr[(y - 1) / 2 + 1][1] = CYAN + "| " + WHITE;
+				arr[(y - 1) / 2 + 1][2] = "  ";
+				arr[(y - 1) / 2 + 2][2] = "  ";
+				arr[(y - 1) / 2][2] = "  ";
+				arr[(y - 1) / 2 + 2][1] = CYAN + "# " + WHITE;
+				arr[(y - 1) / 2][1] = CYAN + "# " + WHITE;
+				exit = 1;
+			}
+		}
+
+		// Проверка побега игрока 
+		if (exit == 1 and ((x1 == 1 and y1 == (y - 1) / 2 + 1) or (x1 == x and y1 == (y - 1) / 2 + 1) or (x1 == (x - 1) / 2 + 1 and y1 == y) or (x1 == (x - 1) / 2 + 1 and y1 == 1))) {
+			system("cls");
+			cout << MAGENT << "\n\n\n\n\n\n\n\n\n\n\t\t\t\t\tИгрок 1 победил в этом испытании!" << WHITE;
+			break;
+		}
+		else if (exit == 1 and ((x_second == 1 and y_second == (y - 1) / 2 + 1) or (x_second == x and y_second == (y - 1) / 2 + 1) or (x_second == (x - 1) / 2 + 1 and y_second == y) or (x_second == (x - 1) / 2 + 1 and y_second == 1))) {
+			system("cls");
+			cout << YELLOW << "\n\n\n\n\n\n\n\n\n\n\t\t\t\t\tИгрок 2 победил в этом испытании!" << WHITE;
+			break;
+		}
+	}
+	for (int i = 0; i < x; i++) {
+		delete[] arr[i];
+	}
+	delete[] arr;
+
+	int ex;
+	cin >> ex;
+}
