@@ -25,6 +25,7 @@ void hidecursor()
 
 int main() {
 	int x, y, x1, y1, x2, y2, x3 = 0, y3 = 0, color, buf1, buf2, kol = 0, type, size, score = 0, score2 = 0, toch = 0, toch2 = 0, x_sec = 0, y_sec = 0, x_sec_ch, y_sec_ch, exit = 0;
+	//ии
 	int comp_x, comp_y, place, live1 = 1, live2 = 1;
 	hidecursor();
 	string const GREEN = "\x1B[92m";
@@ -142,7 +143,7 @@ int main() {
 		if (live2 == 0 or (arr[y_sec - 1][x_sec] == CYAN + "- " + WHITE and score2 < 10) or arr[y_sec - 1][x_sec] == CYAN + "# " + WHITE or arr[y_sec - 1][x_sec] == GREEN + "$ " + WHITE or (y_sec - 1 == 0 or arr[y_sec - 1][x_sec] == "# ") or ((arr[y_sec - 2][x_sec] == YELLOW + "$ " + WHITE or arr[y_sec - 2][x_sec] == GREEN + "$ " + WHITE or arr[y_sec - 2][x_sec] == CYAN + "- " + WHITE or arr[y_sec - 2][x_sec] == CYAN + "| " + WHITE or arr[y_sec - 2][x_sec] == CYAN + "# " + WHITE or arr[y_sec - 2][x_sec] == "# " or arr[y_sec - 2][x_sec] == "# " or arr[y_sec - 2][x_sec] == MAGENT + "# " + WHITE or arr[y_sec - 2][x_sec] == GREEN + "* " + WHITE or arr[y_sec - 2][x_sec] == GRAY + "* " + WHITE) and arr[y_sec - 1][x_sec] == MAGENT + "# " + WHITE)) {
 			break;
 		}
-		else if (arr[y_sec - 1][x_sec] == MAGENT + "# " + WHITE and arr[y_sec - 2][x_sec] != "# " and arr[y_sec - 2][x_sec] != "# ") {
+		else if (arr[y_sec - 1][x_sec] == MAGENT + "# " + WHITE and arr[y_sec - 2][x_sec] != "# ") {
 			arr[y_sec][x_sec] = "  ";
 			y_sec = y_sec - 1;
 			arr[y_sec][x_sec] = YELLOW + "* " + WHITE;
@@ -162,7 +163,7 @@ int main() {
 		if (live1 == 0 or (arr[y1 - 1][x1] == CYAN + "- " + WHITE and score < 10) or arr[y1 - 1][x1] == CYAN + "# " + WHITE or arr[y1 - 1][x1] == YELLOW + "$ " + WHITE or (y1 - 1 == 0 or arr[y1 - 1][x1] == "# ") or ((arr[y1 - 2][x1] == GREEN + "$ " + WHITE or arr[y1 - 2][x1] == YELLOW + "$ " + WHITE or arr[y1 - 2][x1] == CYAN + "- " + WHITE or arr[y1 - 2][x1] == CYAN + "| " + WHITE or arr[y1 - 2][x1] == CYAN + "# " + WHITE or arr[y1 - 2][x1] == "# " or arr[y1 - 2][x1] == "# " or arr[y1 - 2][x1] == MAGENT + "# " + WHITE or arr[y1 - 2][x1] == YELLOW + "* " + WHITE or arr[y1 - 2][x1] == GRAY + "* " + WHITE) and arr[y1 - 1][x1] == MAGENT + "# " + WHITE)) {
 			break;
 		}
-		else if (arr[y1 - 1][x1] == MAGENT + "# " + WHITE and arr[y1 - 2][x1] != "# " and arr[y1 - 2][x1] != "# ") {
+		else if (arr[y1 - 1][x1] == MAGENT + "# " + WHITE and arr[y1 - 2][x1] != "# ") {
 			arr[y1][x1] = "  ";
 			y1 = y1 - 1;
 			arr[y1][x1] = GREEN + "* " + WHITE;;
@@ -182,7 +183,7 @@ int main() {
 		if (live2 == 0 or (arr[y_sec + 1][x_sec] == CYAN + "- " + WHITE and score2 < 10) or arr[y_sec + 1][x_sec] == CYAN + "# " + WHITE or arr[y_sec + 1][x_sec] == GREEN + "$ " + WHITE or (y_sec + 1 == y + 1 or arr[y_sec + 1][x_sec] == "# ") or ((arr[y_sec + 2][x_sec] == GREEN + "$ " + WHITE or arr[y_sec + 2][x_sec] == YELLOW + "$ " + WHITE or arr[y_sec + 2][x_sec] == CYAN + "- " + WHITE or arr[y_sec + 2][x_sec] == CYAN + "| " + WHITE or arr[y_sec + 2][x_sec] == CYAN + "# " + WHITE or arr[y_sec + 2][x_sec] == "# " or arr[y_sec + 2][x_sec] == "# " or arr[y_sec + 2][x_sec] == MAGENT + "# " + WHITE or arr[y_sec + 2][x_sec] == GREEN + "* " + WHITE or arr[y_sec + 2][x_sec] == GRAY + "* " + WHITE) and arr[y_sec + 1][x_sec] == MAGENT + "# " + WHITE)) {
 			break;
 		}
-		else if (arr[y_sec + 1][x_sec] == MAGENT + "# " + WHITE and arr[y_sec + 2][x_sec] != "# " and arr[y_sec + 2][x_sec] != "# ") {
+		else if (arr[y_sec + 1][x_sec] == MAGENT + "# " + WHITE and arr[y_sec + 2][x_sec] != "# ") {
 			arr[y_sec][x_sec] = "  ";
 			y_sec = y_sec + 1;
 			arr[y_sec][x_sec] = YELLOW + "* " + WHITE;
@@ -202,7 +203,7 @@ int main() {
 		if (live1 == 0 or (arr[y1 + 1][x1] == CYAN + "- " + WHITE and score < 10) or arr[y1 + 1][x1] == CYAN + "# " + WHITE or arr[y1 + 1][x1] == YELLOW + "$ " + WHITE or (y1 + 1 == y + 1 or arr[y1 + 1][x1] == "# ") or ((arr[y1 + 2][x1] == GREEN + "$ " + WHITE or arr[y1 + 2][x1] == YELLOW + "$ " + WHITE or arr[y1 + 2][x1] == CYAN + "- " + WHITE or arr[y1 + 2][x1] == CYAN + "| " + WHITE or arr[y1 + 2][x1] == CYAN + "# " + WHITE or arr[y1 + 2][x1] == "# " or arr[y1 + 2][x1] == "# " or arr[y1 + 2][x1] == MAGENT + "# " + WHITE or arr[y1 + 2][x1] == YELLOW + "* " + WHITE or arr[y1 + 2][x1] == GRAY + "* " + WHITE) and arr[y1 + 1][x1] == MAGENT + "# " + WHITE)) {
 			break;
 		}
-		else if (arr[y1 + 1][x1] == MAGENT + "# " + WHITE and arr[y1 + 2][x1] != "# " and arr[y1 + 2][x1] != "# ") {
+		else if (arr[y1 + 1][x1] == MAGENT + "# " + WHITE and arr[y1 + 2][x1] != "# ") {
 			arr[y1][x1] = "  ";
 			y1 = y1 + 1;
 			arr[y1][x1] = GREEN + "* " + WHITE;;
@@ -222,7 +223,7 @@ int main() {
 		if (live1 == 0 or (arr[y1][x1 + 1] == CYAN + "| " + WHITE and score < 10) or arr[y1][x1 + 1] == CYAN + "# " + WHITE or arr[y1][x1 + 1] == YELLOW + "$ " + WHITE or (x1 + 1 == x + 1 or arr[y1][x1 + 1] == "# ") or ((arr[y1][x1 + 2] == YELLOW + "$ " + WHITE or arr[y1][x1 + 2] == GREEN + "$ " + WHITE or arr[y1][x1 + 2] == CYAN + "- " + WHITE or arr[y1][x1 + 2] == CYAN + "| " + WHITE or arr[y1][x1 + 2] == CYAN + "# " + WHITE or arr[y1][x1 + 2] == "# " or arr[y1][x1 + 2] == "# " or arr[y1][x1 + 2] == MAGENT + "# " + WHITE or arr[y1][x1 + 2] == YELLOW + "* " + WHITE or arr[y1][x1 + 2] == GRAY + "* " + WHITE) and arr[y1][x1 + 1] == MAGENT + "# " + WHITE)) {
 			break;
 		}
-		else if (arr[y1][x1 + 1] == MAGENT + "# " + WHITE and arr[y1][x1 + 2] != "# " and arr[y1][x1 + 2] != "# ") {
+		else if (arr[y1][x1 + 1] == MAGENT + "# " + WHITE and arr[y1][x1 + 2] != "# ") {
 			arr[y1][x1] = "  ";
 			x1 = x1 + 1;
 			arr[y1][x1] = GREEN + "* " + WHITE;
@@ -242,7 +243,7 @@ int main() {
 		if (live2 == 0 or (arr[y_sec][x_sec + 1] == CYAN + "| " + WHITE and score2 < 10) or arr[y_sec][x_sec + 1] == CYAN + "# " + WHITE or arr[y_sec][x_sec + 1] == GREEN + "$ " + WHITE or (x_sec + 1 == x + 1 or arr[y_sec][x_sec + 1] == "# ") or ((arr[y_sec][x_sec + 2] == GREEN + "$ " + WHITE or arr[y_sec][x_sec + 2] == YELLOW + "$ " + WHITE or arr[y_sec][x_sec + 2] == CYAN + "- " + WHITE or arr[y_sec][x_sec + 2] == CYAN + "| " + WHITE or arr[y_sec][x_sec + 2] == CYAN + "# " + WHITE or arr[y_sec][x_sec + 2] == "# " or arr[y_sec][x_sec + 2] == "# " or arr[y_sec][x_sec + 2] == MAGENT + "# " + WHITE or arr[y_sec][x_sec + 2] == GREEN + "* " + WHITE or arr[y_sec][x_sec + 2] == GRAY + "* " + WHITE) and arr[y_sec][x_sec + 1] == MAGENT + "# " + WHITE)) {
 			break;
 		}
-		else if (arr[y_sec][x_sec + 1] == MAGENT + "# " + WHITE and arr[y_sec][x_sec + 2] != "# " and arr[y_sec][x_sec + 2] != "# ") {
+		else if (arr[y_sec][x_sec + 1] == MAGENT + "# " + WHITE and arr[y_sec][x_sec + 2] != "# ") {
 			arr[y_sec][x_sec] = "  ";
 			x_sec = x_sec + 1;
 			arr[y_sec][x_sec] = YELLOW + "* " + WHITE;
@@ -262,7 +263,7 @@ int main() {
 		if (live2 == 0 or (arr[y_sec][x_sec - 1] == CYAN + "| " + WHITE and score2 < 10) or arr[y_sec][x_sec - 1] == CYAN + "# " + WHITE or arr[y_sec][x_sec - 1] == GREEN + "$ " + WHITE or (x_sec - 1 == 0 or arr[y_sec][x_sec - 1] == "# ") or ((arr[y_sec][x_sec - 2] == GREEN + "$ " + WHITE or arr[y_sec][x_sec - 2] == YELLOW + "$ " + WHITE or arr[y_sec][x_sec - 2] == CYAN + "- " + WHITE or arr[y_sec][x_sec - 2] == CYAN + "| " + WHITE or arr[y_sec][x_sec - 2] == CYAN + "# " + WHITE or arr[y_sec][x_sec - 2] == "# " or arr[y_sec][x_sec - 2] == "# " or arr[y_sec][x_sec - 2] == MAGENT + "# " + WHITE or arr[y_sec][x_sec - 2] == GREEN + "* " + WHITE or arr[y_sec][x_sec - 2] == GRAY + "* " + WHITE) and arr[y_sec][x_sec - 1] == MAGENT + "# " + WHITE)) {
 			break;
 		}
-		else if (arr[y_sec][x_sec - 1] == MAGENT + "# " + WHITE and arr[y_sec][x_sec - 2] != "# " and arr[y_sec][x_sec - 2] != "# ") {
+		else if (arr[y_sec][x_sec - 1] == MAGENT + "# " + WHITE and arr[y_sec][x_sec - 2] != "# ") {
 			arr[y_sec][x_sec] = "  ";
 			x_sec = x_sec - 1;
 			arr[y_sec][x_sec] = YELLOW + "* " + WHITE;
@@ -282,7 +283,7 @@ int main() {
 		if (live1 == 0 or (arr[y1][x1 - 1] == CYAN + "| " + WHITE and score < 10) or arr[y1][x1 - 1] == CYAN + "# " + WHITE or arr[y1][x1 - 1] == YELLOW + "$ " + WHITE or (x1 - 1 == 0 or arr[y1][x1 - 1] == "# ") or ((arr[y1][x1 - 2] == GREEN + "$ " + WHITE or arr[y1][x1 - 2] == YELLOW + "$ " + WHITE or arr[y1][x1 - 2] == CYAN + "- " + WHITE or arr[y1][x1 - 2] == CYAN + "| " + WHITE or arr[y1][x1 - 2] == CYAN + "# " + WHITE or arr[y1][x1 - 2] == "# " or arr[y1][x1 - 2] == "# " or arr[y1][x1 - 2] == MAGENT + "# " + WHITE or arr[y1][x1 - 2] == YELLOW + "* " + WHITE or arr[y1][x1 - 2] == GRAY + "* " + WHITE) and arr[y1][x1 - 1] == MAGENT + "# " + WHITE)) {
 			break;
 		}
-		else if (arr[y1][x1 - 1] == MAGENT + "# " + WHITE and arr[y1][x1 - 2] != "# " and arr[y1][x1 - 2] != "# ") {
+		else if (arr[y1][x1 - 1] == MAGENT + "# " + WHITE and arr[y1][x1 - 2] != "# ") {
 			arr[y1][x1] = "  ";
 			x1 = x1 - 1;
 			arr[y1][x1] = GREEN + "* " + WHITE;
